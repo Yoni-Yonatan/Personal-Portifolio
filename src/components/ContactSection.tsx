@@ -136,7 +136,7 @@ export function ContactSection({
           {/* Left Column: Direct Connect & Fast Actions */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             {/* Email Direct Card */}
-            <div className="rounded-3xl p-7 bg-white/10 border border-white/25 backdrop-blur-xl shadow-lg">
+            <div className="rounded-3xl p-7 bg-white/[0.08] border border-white/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
               <div className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-2">
                 Direct Electronic Mail
               </div>
@@ -254,9 +254,9 @@ export function ContactSection({
           <div className="lg:col-span-7">
             <form
               onSubmit={handleSubmit}
-              className="rounded-3xl p-7 sm:p-9 bg-white/[0.03] border border-white/15 backdrop-blur-md flex flex-col gap-6"
+              className="rounded-3xl p-7 sm:p-9 bg-white/[0.07] border border-white/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col gap-6"
             >
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/60">
+              <div className="text-xs font-semibold uppercase tracking-wider text-white/70">
                 Dispatch A Project Inquiry
               </div>
 
@@ -297,7 +297,7 @@ export function ContactSection({
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Ada Lovelace"
-                    className="w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/15 text-white text-sm focus:outline-none focus:border-[#4f46e5] focus:bg-white/[0.08] transition-all placeholder:text-white/30"
+                    className="w-full px-4 py-3 rounded-2xl bg-white/[0.05] border border-white/15 text-white text-sm focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]/30 focus:bg-white/[0.09] transition-all placeholder:text-white/30"
                   />
                 </div>
 
@@ -311,7 +311,7 @@ export function ContactSection({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="ada@example.com"
-                    className="w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/15 text-white text-sm focus:outline-none focus:border-[#4f46e5] focus:bg-white/[0.08] transition-all placeholder:text-white/30"
+                    className="w-full px-4 py-3 rounded-2xl bg-white/[0.05] border border-white/15 text-white text-sm focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]/30 focus:bg-white/[0.09] transition-all placeholder:text-white/30"
                   />
                 </div>
               </div>
@@ -327,7 +327,7 @@ export function ContactSection({
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Tell me about what you are building, timeline, and tech objectives..."
-                  className="w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/15 text-white text-sm focus:outline-none focus:border-[#4f46e5] focus:bg-white/[0.08] transition-all placeholder:text-white/30 resize-none"
+                  className="w-full px-4 py-3 rounded-2xl bg-white/[0.05] border border-white/15 text-white text-sm focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]/30 focus:bg-white/[0.09] transition-all placeholder:text-white/30 resize-none"
                 />
               </div>
 

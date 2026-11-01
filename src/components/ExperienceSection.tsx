@@ -140,7 +140,7 @@ export function ExperienceSection({
       {/* Interactive Timeline Container */}
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Central Vertical Neon Line with Animated Electric Energy Stream */}
-        <div className="hidden md:block absolute left-1/2 top-4 bottom-4 -translate-x-1/2 w-[2px] bg-white/20 overflow-hidden">
+        <div className="absolute left-4 sm:left-6 md:left-1/2 top-4 bottom-4 -translate-x-1/2 w-[2px] bg-white/20 overflow-hidden rounded-full">
           <div
             className={`w-full h-36 animate-stream-down ${
               combinedColor
@@ -161,19 +161,19 @@ export function ExperienceSection({
                 onClick={() => setActiveItem(exp.id)}
                 className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-0 cursor-pointer group`}
               >
-                {/* Desktop Left / Right Card Placement */}
+                {/* Left / Right Card Placement */}
                 <div
-                  className={`w-full md:w-1/2 ${
+                  className={`w-full md:w-1/2 pl-10 sm:pl-14 md:pl-0 ${
                     isEven ? 'md:pr-12 md:text-right' : 'md:order-2 md:pl-12 md:text-left'
                   }`}
                 >
                   <div
-                    className={`relative rounded-3xl p-6 sm:p-8 transition-all duration-300 border backdrop-blur-xl ${
+                    className={`relative rounded-3xl p-6 sm:p-8 transition-all duration-300 border backdrop-blur-2xl ${
                       isSelected
                         ? combinedColor
-                          ? 'bg-gradient-to-br from-white/20 to-[#4f46e5]/25 border-white/50 shadow-[0_20px_50px_rgba(79,70,229,0.3)] -translate-y-1'
-                          : 'bg-white/20 border-white/50 shadow-[0_20px_50px_rgba(0,0,0,0.18)] -translate-y-1'
-                        : 'bg-white/10 border-white/25 hover:border-white/40 hover:bg-white/15'
+                          ? 'bg-gradient-to-br from-white/25 to-[#4f46e5]/30 border-white/60 shadow-[0_20px_50px_rgba(79,70,229,0.35)] -translate-y-1'
+                          : 'bg-white/25 border-white/60 shadow-[0_20px_50px_rgba(0,0,0,0.22)] -translate-y-1'
+                        : 'bg-white/[0.08] border-white/20 hover:border-white/45 hover:bg-white/[0.14]'
                     }`}
                   >
                     {/* Period & Role Tag */}
@@ -252,18 +252,18 @@ export function ExperienceSection({
                   </div>
                 </div>
 
-                {/* Central Beacon Node on Desktop */}
-                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center justify-center">
+                {/* Beacon Node (visible on mobile and desktop) */}
+                <div className="flex absolute left-4 sm:left-6 md:left-1/2 -translate-x-1/2 top-8 md:top-auto items-center justify-center z-10">
                   <div
-                    className={`w-6 h-6 rounded-full border-2 border-white flex items-center justify-center transition-transform duration-300 ${
-                      isSelected ? 'scale-125' : 'group-hover:scale-110'
+                    className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-white flex items-center justify-center transition-all duration-300 ${
+                      isSelected ? 'scale-125 shadow-lg' : 'group-hover:scale-110'
                     }`}
                     style={{
                       backgroundColor: exp.accentColor,
                       boxShadow: `0 0 16px ${exp.accentColor}`,
                     }}
                   >
-                    <div className="w-2 h-2 rounded-full bg-white" />
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white" />
                   </div>
                 </div>
 

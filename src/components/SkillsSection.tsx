@@ -111,7 +111,7 @@ function TiltBadge({
             ? `0 20px 40px -8px ${glowColor}, 0 0 25px rgba(0,0,0,0.35)`
             : '0 8px 24px rgba(0,0,0,0.18)',
         }}
-        className="relative flex items-center justify-center p-3.5 sm:p-4 rounded-2xl bg-white/10 border border-white/25 backdrop-blur-xl transition-all duration-300 hover:border-white/70 hover:bg-white/20 cursor-pointer"
+        className="relative flex items-center justify-center p-2.5 sm:p-3.5 md:p-4 rounded-2xl bg-white/[0.08] border border-white/20 backdrop-blur-xl hover:border-white/60 hover:bg-white/[0.18] cursor-pointer"
       >
         {children}
       </div>
@@ -159,14 +159,14 @@ export function SkillsSection({
 
         {/* 3D Physics Tilting Icon Card */}
         <TiltBadge glowColor={item.glowColor}>
-          <Icon size={52} className="transition-transform duration-300 group-hover:scale-105" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center">
+            <Icon size={46} className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110" />
+          </div>
         </TiltBadge>
 
         {/* Floating Tooltip */}
         <div
-          className={`absolute -top-11 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-200 z-30 whitespace-nowrap text-white text-[13px] font-semibold px-3 py-1 rounded-full shadow-2xl backdrop-blur-md border border-white/30 ${
-            combinedColor ? 'bg-[#4f46e5]/95 shadow-[0_8px_20px_rgba(79,70,229,0.35)]' : 'bg-[#0165a3]/95'
-          }`}
+          className="absolute -top-10 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-200 z-30 whitespace-nowrap text-white text-[11px] sm:text-[12px] font-semibold px-2.5 py-1 rounded-full shadow-2xl backdrop-blur-xl border border-white/20 bg-black/85"
         >
           {item.name}
         </div>

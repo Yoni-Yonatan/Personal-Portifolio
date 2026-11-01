@@ -30,7 +30,7 @@ const FLOATING_TAGS: FloatingTag[] = [
     glowColor: 'rgba(6, 182, 212, 0.85)',
     dotColor: '#06B6D4',
     // Directly above the top of his hair
-    className: 'top-[2%] sm:top-[4%] right-[10%] sm:right-[14%]',
+    className: 'top-[2%] sm:top-[4%] right-[6%] sm:right-[14%]',
     animationClass: 'animate-float-1',
   },
   {
@@ -40,7 +40,7 @@ const FLOATING_TAGS: FloatingTag[] = [
     glowColor: 'rgba(79, 70, 229, 0.95)',
     dotColor: '#4f46e5',
     // Snug beside the left hair curve
-    className: 'top-[15%] sm:top-[17%] right-[35%] sm:right-[39%]',
+    className: 'top-[15%] sm:top-[17%] right-[22%] sm:right-[38%]',
     animationClass: 'animate-float-2',
   },
   {
@@ -50,7 +50,7 @@ const FLOATING_TAGS: FloatingTag[] = [
     glowColor: 'rgba(168, 85, 247, 0.85)',
     dotColor: '#A855F7',
     // Snug beside the right hair curve
-    className: 'top-[14%] sm:top-[16%] right-[0%] sm:right-[2%]',
+    className: 'top-[14%] sm:top-[16%] right-[2%] sm:right-[4%]',
     animationClass: 'animate-float-3',
   },
   {
@@ -60,7 +60,7 @@ const FLOATING_TAGS: FloatingTag[] = [
     glowColor: 'rgba(1, 145, 235, 0.95)',
     dotColor: '#0191EB',
     // Snug beside the right cheek / ear
-    className: 'top-[36%] sm:top-[38%] right-[-3%] sm:right-[-1%]',
+    className: 'top-[35%] sm:top-[38%] right-[2%] sm:right-[2%]',
     animationClass: 'animate-float-1',
   },
   {
@@ -70,7 +70,7 @@ const FLOATING_TAGS: FloatingTag[] = [
     glowColor: 'rgba(16, 185, 129, 0.85)',
     dotColor: '#10B981',
     // Directly under his chin / collar
-    className: 'top-[58%] sm:top-[60%] right-[10%] sm:right-[14%]',
+    className: 'top-[56%] sm:top-[60%] right-[6%] sm:right-[14%]',
     animationClass: 'animate-float-4',
   },
 ];
@@ -172,32 +172,27 @@ export function Hero({
         {FLOATING_TAGS.map((tag) => (
           <div
             key={tag.id}
-            className={`absolute ${tag.className} ${tag.animationClass} pointer-events-auto transition-transform duration-300 hover:scale-110 z-20`}
+            className={`absolute ${tag.className} ${tag.animationClass} pointer-events-auto transition-all duration-300 hover:scale-105 z-20`}
           >
-            <div className="relative inline-flex items-center gap-2 bg-transparent cursor-default group">
+            <div
+              className="relative inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-black/45 backdrop-blur-xl border border-white/20 cursor-default group hover:border-white/50 hover:bg-black/60 transition-all duration-300"
+              style={{
+                boxShadow: `0 8px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.18), 0 0 12px ${tag.dotColor}35`,
+              }}
+            >
               <span
-                className="w-2.5 h-2.5 rounded-full animate-pulse shrink-0"
+                className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full shrink-0"
                 style={{
                   backgroundColor: tag.dotColor,
-                  boxShadow: `0 0 10px ${tag.dotColor}, 0 0 20px ${tag.dotColor}`,
+                  boxShadow: `0 0 8px ${tag.dotColor}, 0 0 16px ${tag.dotColor}`,
                 }}
               />
-              <span
-                className="text-white text-xs sm:text-base font-semibold tracking-wide whitespace-nowrap"
-                style={{
-                  textShadow: '0 2px 6px rgba(0,0,0,0.5)',
-                }}
-              >
+              <span className="text-white text-[11px] sm:text-[13px] font-semibold tracking-wide whitespace-nowrap">
                 {tag.label}
               </span>
               {tag.badge && (
-                <span
-                  className="text-xs sm:text-sm font-normal text-white/80 tracking-normal whitespace-nowrap"
-                  style={{
-                    textShadow: '0 2px 6px rgba(0,0,0,0.5)',
-                  }}
-                >
-                  · {tag.badge.replace(/^[^a-zA-Z0-9]+/, '')}
+                <span className="text-[10px] sm:text-[11px] font-medium text-white/75 bg-white/10 px-1.5 py-0.5 rounded-full border border-white/10 whitespace-nowrap">
+                  {tag.badge.replace(/^[^a-zA-Z0-9]+/, '')}
                 </span>
               )}
             </div>
@@ -215,36 +210,41 @@ export function Hero({
           willChange: 'transform, opacity',
         }}
       >
-        {/* Blurred intro label */}
-        <div
-          className="pointer-events-none select-none mb-5 sm:mb-6"
-          style={{
-            fontSize: 'clamp(18px, 4vw, 26px)',
-            lineHeight: 1.3,
-            fontWeight: 400,
-            color: '#fff',
-            filter: 'blur(4px)',
-          }}
-        >
-          Hey there, meet Yoni Yonatan,
-          <br />
-          Software Engineer & Creative Technologist
+        {/* Crisp prestigious status badge & headline */}
+        <div className="mb-4 sm:mb-5">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/20 text-white text-xs sm:text-[13px] font-medium tracking-wide mb-3 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] animate-pulse" />
+            <span className="text-white/90">Available for High-Impact Roles & Contracts</span>
+          </div>
+          <h1
+            className="text-white tracking-tight leading-tight font-medium"
+            style={{
+              fontSize: 'clamp(24px, 4.4vw, 36px)',
+              fontFamily: 'var(--font-heading)',
+              textShadow: '0 4px 20px rgba(0,0,0,0.3)',
+            }}
+          >
+            Meet <span className="font-semibold text-white">Yoni Yonatan</span>
+            <span className="block text-white/80 font-normal text-[0.72em] mt-1 tracking-normal">
+              Software Engineer & Creative Technologist
+            </span>
+          </h1>
         </div>
 
         {/* Typewriter text */}
         <p
-          className="text-white mb-5 sm:mb-6"
+          className="text-white/95 mb-6 sm:mb-7 font-normal"
           style={{
-            fontSize: 'clamp(18px, 4vw, 26px)',
-            lineHeight: 1.35,
-            fontWeight: 400,
-            minHeight: '54px',
+            fontSize: 'clamp(16px, 3.2vw, 20px)',
+            lineHeight: 1.45,
+            minHeight: '56px',
+            textShadow: '0 2px 10px rgba(0,0,0,0.3)',
           }}
         >
           <span>{displayed}</span>
           {!done && (
             <span
-              className="inline-block w-[2px] h-[1.1em] bg-white align-middle ml-[2px] animate-blink"
+              className="inline-block w-[2px] h-[1.1em] bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] align-middle ml-[3px] animate-blink"
               aria-hidden="true"
             />
           )}

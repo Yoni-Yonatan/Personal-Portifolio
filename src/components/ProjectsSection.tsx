@@ -202,10 +202,10 @@ export function ProjectsSection({
               key={project.id}
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
-              className={`relative group rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-500 overflow-hidden border backdrop-blur-xl ${
+              className={`relative group rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 overflow-hidden border backdrop-blur-2xl ${
                 isHovered
-                  ? 'border-white/50 bg-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.2)] -translate-y-2'
-                  : 'border-white/25 bg-white/10 shadow-lg'
+                  ? 'border-white/50 bg-white/[0.14] shadow-[0_25px_60px_rgba(0,0,0,0.35)] -translate-y-1.5'
+                  : 'border-white/20 bg-white/[0.07] shadow-[0_15px_35px_rgba(0,0,0,0.2)]'
               }`}
             >
               {/* Corner Glow Accent */}
