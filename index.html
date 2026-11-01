@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yoni Yonatan® — Software Engineer</title>
+    <meta name="description" content="Portfolio of Yoni Yonatan, Software Engineer crafting scalable systems and interactive interfaces." />
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/5ac3fe7c6abd2f62067f266d89671492?family=HelveticaNowDisplay-Medium" type="text/css"/>
+    <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/1aa3377e489837a26d019bba501e779d?family=HelveticaNowDisplayW01-Rg" type="text/css"/>
+
+    <!-- Anti-Clickjacking Defense-in-Depth (OWASP) -->
+    <style id="antiClickjack">
+      html { display: none !important; }
+    </style>
+    <script>
+      if (self === top) {
+        var antiClickjack = document.getElementById("antiClickjack");
+        if (antiClickjack) antiClickjack.parentNode.removeChild(antiClickjack);
+      } else {
+        top.location = self.location;
+      }
+    </script>
+  </head>
+  <body class="bg-[#0191EB] text-white selection:bg-white selection:text-[#0191EB]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

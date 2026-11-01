@@ -1,0 +1,239 @@
+@import "tailwindcss";
+
+:root {
+  --font-heading: 'HelveticaNowDisplay-Medium', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'HelveticaNowDisplayW01-Rg', 'Helvetica Neue', Arial, sans-serif;
+  --brand-primary: #0191EB;
+  --brand-secondary: #4f46e5;
+  --brand-gradient: linear-gradient(135deg, #0191EB 0%, #4f46e5 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #0191EB;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #0191EB;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #4f46e5;
+  color: #ffffff;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* 1. Typewriter Blinking Cursor */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* 2. Fluid Floating Animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(0.5deg);
+  }
+}
+
+@keyframes floatAlt {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-0.5deg);
+  }
+}
+
+@keyframes floatOrbit {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(6px, -8px) scale(1.02);
+  }
+  66% {
+    transform: translate(-5px, 6px) scale(0.98);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-float-1 {
+  animation: floatSlow 4.2s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: floatAlt 5s ease-in-out infinite;
+}
+
+.animate-float-3 {
+  animation: floatSlow 5.8s ease-in-out infinite 1s;
+}
+
+.animate-float-4 {
+  animation: floatAlt 4.6s ease-in-out infinite 0.6s;
+}
+
+.animate-float-orbit {
+  animation: floatOrbit 7s ease-in-out infinite;
+}
+
+/* 3. Radiant Pulse Glow */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 30px rgba(79, 70, 229, 0.45);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.7), 0 0 50px rgba(1, 145, 235, 0.75);
+    transform: scale(1.03);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* 4. Electric Stream Light Beam (Timeline & Borders) */
+@keyframes streamDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.animate-stream-down {
+  animation: streamDown 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* 5. Ambient Luminous Orbs Drifting */
+@keyframes orbDrift1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(40px, -30px) scale(1.15);
+  }
+}
+
+@keyframes orbDrift2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1.1);
+  }
+  50% {
+    transform: translate(-35px, 25px) scale(0.95);
+  }
+}
+
+.animate-orb-1 {
+  animation: orbDrift1 12s ease-in-out infinite alternate;
+}
+
+.animate-orb-2 {
+  animation: orbDrift2 15s ease-in-out infinite alternate;
+}
+
+/* 6. Specular Shimmer Sweep Effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-sweep {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s infinite;
+}
+
+/* 7. 3D Spatial Stage & Transitions */
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@keyframes stageIn {
+  0% {
+    opacity: 0;
+    transform: perspective(1200px) translate3d(0, 30px, 60px) rotateX(-3deg) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1200px) translate3d(0, 0, 0) rotateX(0deg) scale(1);
+  }
+}
+
+.animate-stage-in {
+  animation: stageIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 8. Minimalist Glass Scrollbar for 3D Stage */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
