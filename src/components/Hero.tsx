@@ -226,7 +226,7 @@ export function Hero({
           >
             Meet <span className="font-semibold text-white">Yoni Yonatan</span>
             <span className="block text-white/80 font-normal text-[0.72em] mt-1 tracking-normal">
-              Software Engineer & Creative Technologist
+              Best Software Engineer & Cybersecurity Specialist
             </span>
           </h1>
         </div>
