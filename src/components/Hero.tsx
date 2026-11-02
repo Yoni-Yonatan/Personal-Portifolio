@@ -9,7 +9,7 @@ const PILL_BUTTONS = [
 ];
 
 const TYPEWRITER_TEXT =
-  'Glad you stopped in. Building scalable systems and fluid digital experiences. Now, what are we building?';
+  'Glad you stopped in. Engineering resilient software architectures and defending mission-critical systems. Now, what are we building?';
 
 interface FloatingTag {
   id: string;
@@ -24,29 +24,29 @@ interface FloatingTag {
 // Positioned in an exact circular orbit around his head (above hair, upper-left, upper-right, right ear, and below chin)
 const FLOATING_TAGS: FloatingTag[] = [
   {
-    id: 'creative',
-    label: 'Creative Mind',
-    badge: '✳︎ Visionary',
-    glowColor: 'rgba(6, 182, 212, 0.85)',
-    dotColor: '#06B6D4',
+    id: 'cybersecurity',
+    label: 'Cybersecurity Specialist',
+    badge: 'SecOps & Defenses',
+    glowColor: 'rgba(0, 229, 255, 0.9)',
+    dotColor: '#00E5FF',
     // Directly above the top of his hair
     className: 'top-[2%] sm:top-[4%] right-[6%] sm:right-[14%]',
     animationClass: 'animate-float-1',
   },
   {
-    id: 'architect',
-    label: 'System Architect',
-    badge: 'Scalable',
-    glowColor: 'rgba(79, 70, 229, 0.95)',
-    dotColor: '#4f46e5',
+    id: 'software-engineer',
+    label: 'Software Engineer',
+    badge: 'Full-Stack Core',
+    glowColor: 'rgba(1, 145, 235, 0.95)',
+    dotColor: '#0191EB',
     // Snug beside the left hair curve
     className: 'top-[15%] sm:top-[17%] right-[22%] sm:right-[38%]',
     animationClass: 'animate-float-2',
   },
   {
-    id: 'age',
-    label: '19 Years Old',
-    badge: 'Prodigy',
+    id: 'appsec',
+    label: 'Application Security',
+    badge: 'OWASP & Zero-Trust',
     glowColor: 'rgba(168, 85, 247, 0.85)',
     dotColor: '#A855F7',
     // Snug beside the right hair curve
@@ -54,19 +54,19 @@ const FLOATING_TAGS: FloatingTag[] = [
     animationClass: 'animate-float-3',
   },
   {
-    id: 'expert',
-    label: 'Expert Software Engineer',
-    badge: 'Full-Stack',
-    glowColor: 'rgba(1, 145, 235, 0.95)',
-    dotColor: '#0191EB',
+    id: 'systems',
+    label: 'Systems & Cloud Architecture',
+    badge: 'Scalable Systems',
+    glowColor: 'rgba(79, 70, 229, 0.95)',
+    dotColor: '#4f46e5',
     // Snug beside the right cheek / ear
     className: 'top-[35%] sm:top-[38%] right-[2%] sm:right-[2%]',
     animationClass: 'animate-float-1',
   },
   {
-    id: 'speed',
-    label: 'Fast Execution & Clean Code',
-    badge: '⚡ Quality',
+    id: 'pentesting',
+    label: 'Vulnerability Assessment',
+    badge: '⚡ PenTesting',
     glowColor: 'rgba(16, 185, 129, 0.85)',
     dotColor: '#10B981',
     // Directly under his chin / collar

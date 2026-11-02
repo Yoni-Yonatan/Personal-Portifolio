@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
 const PROJECT_TYPES = [
-  'Full-Stack App',
-  'Cloud Architecture',
-  'Distributed Systems',
-  'Consulting / Advisory',
+  'Cybersecurity Audit',
+  'Software Engineering',
+  'Penetration Testing',
+  'Cloud Architecture & Security',
 ];
 
 export function ContactSection({
@@ -111,7 +111,7 @@ export function ContactSection({
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white shadow-[0_0_10px_white]" />
             </span>
             <span className="text-xs sm:text-sm font-medium text-white">
-              Available for high-impact contracts & full-time engineering
+              Available for Cybersecurity & Software Engineering Roles
             </span>
           </div>
 
@@ -119,15 +119,15 @@ export function ContactSection({
             className="text-3xl sm:text-5xl md:text-6xl font-medium tracking-tight text-white mb-5"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            Let&apos;s build something <br className="hidden sm:inline" />
+            Let&apos;s build and defend <br className="hidden sm:inline" />
             <span className="text-white drop-shadow-md">
-              extraordinary together.
+              something extraordinary.
             </span>
           </h2>
 
           <p className="text-white/90 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Have a project in mind, an architectural challenge to solve, or an engineering role?
-            Reach out directly or dispatch a quick message below.
+            Have a system to engineer, an architectural challenge to solve, or critical infrastructure to defend?
+            Reach out directly or dispatch a transmission below.
           </p>
         </div>
 

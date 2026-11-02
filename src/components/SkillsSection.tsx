@@ -4,65 +4,66 @@ import { TechIcons } from './TechIcons';
 interface TechItem {
   id: string;
   name: string;
-  category: 'frontend' | 'backend' | 'database' | 'devops';
+  category: 'frontend' | 'backend' | 'database' | 'devops' | 'security';
   glowColor: string;
 }
 
 const TIER_1: TechItem[] = [
-  { id: 'html5', name: 'HTML5', category: 'frontend', glowColor: '#E34F26' },
-  { id: 'css3', name: 'CSS3', category: 'frontend', glowColor: '#1572B6' },
-  { id: 'javascript', name: 'JavaScript', category: 'frontend', glowColor: '#F7DF1E' },
-  { id: 'tailwind', name: 'Tailwind CSS', category: 'frontend', glowColor: '#06B6D4' },
-  { id: 'bootstrap', name: 'Bootstrap', category: 'frontend', glowColor: '#8957E5' },
-  { id: 'react', name: 'React', category: 'frontend', glowColor: '#61DAFB' },
-  { id: 'redux', name: 'Redux Toolkit', category: 'frontend', glowColor: '#764ABC' },
-  { id: 'tanstack', name: 'TanStack', category: 'frontend', glowColor: '#FF4154' },
+  { id: 'shield', name: 'Cybersecurity', category: 'security', glowColor: '#00E5FF' },
+  { id: 'penetration', name: 'Penetration Testing', category: 'security', glowColor: '#10B981' },
+  { id: 'cryptography', name: 'Cryptography & Auth', category: 'security', glowColor: '#A855F7' },
+  { id: 'network', name: 'Network Security', category: 'security', glowColor: '#0191EB' },
+  { id: 'linux', name: 'Linux Hardening', category: 'security', glowColor: '#FBBF24' },
   { id: 'typescript', name: 'TypeScript', category: 'frontend', glowColor: '#3178C6' },
+  { id: 'react', name: 'React 19', category: 'frontend', glowColor: '#61DAFB' },
   { id: 'nextjs', name: 'Next.js', category: 'frontend', glowColor: '#FFFFFF' },
-  { id: 'framermotion', name: 'Framer Motion', category: 'frontend', glowColor: '#0055FF' },
-  { id: 'stripe', name: 'Stripe API', category: 'backend', glowColor: '#635BFF' },
+  { id: 'tailwind', name: 'Tailwind CSS', category: 'frontend', glowColor: '#06B6D4' },
   { id: 'nodejs', name: 'Node.js', category: 'backend', glowColor: '#339933' },
+  { id: 'go', name: 'Golang / Systems', category: 'backend', glowColor: '#00ADD8' },
+  { id: 'docker', name: 'Docker / Sandbox', category: 'devops', glowColor: '#2496ED' },
+  { id: 'postgresql', name: 'PostgreSQL', category: 'database', glowColor: '#336791' },
 ];
 
 const TIER_2: TechItem[] = [
-  { id: 'html5', name: 'Semantic Web', category: 'frontend', glowColor: '#E34F26' },
-  { id: 'css3', name: 'Responsive UI', category: 'frontend', glowColor: '#1572B6' },
-  { id: 'javascript', name: 'ESNext', category: 'frontend', glowColor: '#F7DF1E' },
-  { id: 'tailwind', name: 'Tailwind V4', category: 'frontend', glowColor: '#06B6D4' },
-  { id: 'mui', name: 'Material UI', category: 'frontend', glowColor: '#007FFF' },
-  { id: 'react', name: 'React 19', category: 'frontend', glowColor: '#61DAFB' },
-  { id: 'dribbble', name: 'Dribbble UI', category: 'frontend', glowColor: '#EA4C89' },
-  { id: 'reactquery', name: 'TanStack Query', category: 'frontend', glowColor: '#FF4154' },
-  { id: 'typescript', name: 'Type Safety', category: 'frontend', glowColor: '#3178C6' },
-  { id: 'nextjs', name: 'Server Components', category: 'frontend', glowColor: '#FFFFFF' },
+  { id: 'shield', name: 'AppSec / OWASP', category: 'security', glowColor: '#00E5FF' },
+  { id: 'penetration', name: 'Vulnerability Analysis', category: 'security', glowColor: '#10B981' },
+  { id: 'cryptography', name: 'Zero-Trust Protocol', category: 'security', glowColor: '#A855F7' },
+  { id: 'javascript', name: 'ESNext Core', category: 'frontend', glowColor: '#F7DF1E' },
+  { id: 'tanstack', name: 'TanStack State', category: 'frontend', glowColor: '#FF4154' },
+  { id: 'redux', name: 'Redux Toolkit', category: 'frontend', glowColor: '#764ABC' },
+  { id: 'framermotion', name: 'Fluid Motion', category: 'frontend', glowColor: '#0055FF' },
+  { id: 'stripe', name: 'Stripe Security API', category: 'backend', glowColor: '#635BFF' },
+  { id: 'honojs', name: 'Hono.js Edge', category: 'backend', glowColor: '#FF7A00' },
+  { id: 'express', name: 'Express Hardened', category: 'backend', glowColor: '#888888' },
 ];
 
 const TIER_3: TechItem[] = [
-  { id: 'nodejs', name: 'Node.js Runtime', category: 'backend', glowColor: '#339933' },
-  { id: 'honojs', name: 'Hono.js', category: 'backend', glowColor: '#FF7A00' },
-  { id: 'express', name: 'Express.js', category: 'backend', glowColor: '#888888' },
-  { id: 'firebase', name: 'Firebase', category: 'database', glowColor: '#FFA611' },
-  { id: 'postgresql', name: 'PostgreSQL', category: 'database', glowColor: '#336791' },
+  { id: 'network', name: 'Packet Inspection', category: 'security', glowColor: '#0191EB' },
+  { id: 'linux', name: 'Kernel & Syscalls', category: 'security', glowColor: '#FBBF24' },
   { id: 'prisma', name: 'Prisma ORM', category: 'database', glowColor: '#5A67D8' },
-  { id: 'graphql', name: 'GraphQL', category: 'backend', glowColor: '#E10098' },
+  { id: 'firebase', name: 'Firebase Security Rules', category: 'database', glowColor: '#FFA611' },
+  { id: 'graphql', name: 'GraphQL Shielded', category: 'backend', glowColor: '#E10098' },
+  { id: 'turborepo', name: 'Monorepo Tooling', category: 'devops', glowColor: '#EF4444' },
+  { id: 'reactnative', name: 'Secure Mobile', category: 'frontend', glowColor: '#61DAFB' },
 ];
 
 const TIER_4: TechItem[] = [
-  { id: 'reactnative', name: 'React Native', category: 'frontend', glowColor: '#61DAFB' },
-  { id: 'docker', name: 'Docker Containers', category: 'devops', glowColor: '#2496ED' },
-  { id: 'figma', name: 'Figma UI/UX', category: 'frontend', glowColor: '#0ACF83' },
+  { id: 'docker', name: 'Container Isolation', category: 'devops', glowColor: '#2496ED' },
+  { id: 'figma', name: 'UI / UX Design', category: 'frontend', glowColor: '#0ACF83' },
+  { id: 'mui', name: 'Design Systems', category: 'frontend', glowColor: '#007FFF' },
 ];
 
 const TIER_5: TechItem[] = [
-  { id: 'go', name: 'Golang / Systems', category: 'backend', glowColor: '#00ADD8' },
+  { id: 'shield', name: 'Defensive Architecture', category: 'security', glowColor: '#00E5FF' },
 ];
 
 const CATEGORIES = [
   { id: 'all', label: 'All Technologies' },
-  { id: 'frontend', label: 'Frontend' },
-  { id: 'backend', label: 'Backend & APIs' },
+  { id: 'security', label: 'Cybersecurity & Defenses' },
+  { id: 'backend', label: 'Backend & Systems' },
+  { id: 'frontend', label: 'Frontend Engineering' },
   { id: 'database', label: 'Databases & Cloud' },
-  { id: 'devops', label: 'DevOps & Tooling' },
+  { id: 'devops', label: 'DevSecOps & Tooling' },
 ];
 
 function TiltBadge({
@@ -200,19 +201,18 @@ export function SkillsSection({
 
       {/* Section Header */}
       <div className={`relative z-10 text-center max-w-2xl mx-auto ${inStage ? 'mb-6 sm:mb-8' : 'mb-12'}`}>
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/25 bg-white/10 backdrop-blur-md text-white text-[13px] tracking-widest uppercase mb-4 shadow-lg">
-          <span className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_white] animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white text-[13px] tracking-widest uppercase mb-4 shadow-lg">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] animate-pulse" />
           Technical Constellation
         </div>
         <h2
-          className="text-3xl sm:text-5xl font-normal tracking-tight text-white mb-3"
+          className="text-3xl sm:text-5xl font-medium tracking-tight text-white mb-3"
           style={{ fontFamily: 'var(--font-heading)' }}
         >
-          Skills & Technologies
+          Cybersecurity & Software Engineering Stack
         </h2>
-        <p className="text-white/90 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-          The engineering stack, modern frameworks, and architectural tools I leverage to build
-          resilient, high-performance web applications.
+        <p className="text-white/90 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+          Languages, offensive and defensive security tools, and resilient software engineering frameworks I leverage to design, build, and defend high-concurrency systems.
         </p>
 
         {/* Category Filters */}

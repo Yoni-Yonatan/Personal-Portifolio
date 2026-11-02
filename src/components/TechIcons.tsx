@@ -294,4 +294,46 @@ export const TechIcons: Record<string, React.FC<IconProps>> = {
       />
     </svg>
   ),
+
+  shield: ({ className = '', size = 48 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#00E5FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(0, 229, 255, 0.15)" />
+      <path d="M9 12l2 2 4-4" stroke="#FFF" strokeWidth="2" />
+    </svg>
+  ),
+
+  cryptography: ({ className = '', size = 48 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#A855F7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="3" y="11" width="18" height="11" rx="3" ry="3" fill="rgba(168, 85, 247, 0.18)" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      <circle cx="12" cy="16" r="1.5" fill="#FFF" />
+      <path d="M12 17.5v2" stroke="#FFF" strokeWidth="2" />
+    </svg>
+  ),
+
+  penetration: ({ className = '', size = 48 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="2" y="4" width="20" height="16" rx="3" fill="rgba(16, 185, 129, 0.15)" />
+      <path d="M6 9l4 3-4 3" stroke="#FFF" strokeWidth="2" />
+      <path d="M13 15h5" stroke="#FFF" strokeWidth="2" />
+    </svg>
+  ),
+
+  linux: ({ className = '', size = 48 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#FBBF24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <circle cx="12" cy="12" r="10" fill="rgba(251, 191, 36, 0.15)" />
+      <circle cx="9" cy="10" r="1.5" fill="#FFF" />
+      <circle cx="15" cy="10" r="1.5" fill="#FFF" />
+      <path d="M9 15c1 1.5 5 1.5 6 0" stroke="#FFF" strokeWidth="1.8" />
+    </svg>
+  ),
+
+  network: ({ className = '', size = 48 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#0191EB" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="9" y="2" width="6" height="5" rx="1" fill="rgba(1, 145, 235, 0.2)" />
+      <rect x="2" y="17" width="6" height="5" rx="1" fill="rgba(1, 145, 235, 0.2)" />
+      <rect x="16" y="17" width="6" height="5" rx="1" fill="rgba(1, 145, 235, 0.2)" />
+      <path d="M12 7v5M5 12h14v5M5 12v5" stroke="#00E5FF" strokeWidth="1.8" />
+    </svg>
+  ),
 };

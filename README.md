@@ -1,6 +1,6 @@
 <div align="center">
 
-# ✦ Yoni Yonatan® — Personal Portfolio
+# ✦ Yoni Yonatan® — Cybersecurity & Software Engineering
 
 **A high-performance, interactive 3D spatial developer portfolio crafted with React 19, TypeScript, and Tailwind CSS v4.**
 
@@ -18,9 +18,9 @@
 
 ## 🌟 Overview
 
-This repository houses the source code for the personal portfolio of **Yoni Yonatan** — Software Engineer & Creative Technologist. 
+This repository houses the source code for the personal portfolio of **Yoni Yonatan** — specialized strictly in **Cybersecurity & Software Engineering**. 
 
-Engineered from first principles, this portfolio blends cutting-edge web design, cinematic interactive media, and spatial 3D physics into a unified digital experience. Every interaction is hardware-accelerated and locked to display refresh rates (60Hz / 120Hz ProMotion).
+Engineered from first principles, this portfolio showcases resilient software architectures, application security defenses, and spatial 3D physics into a unified digital experience. Every interaction is hardware-accelerated and locked to display refresh rates (60Hz / 120Hz ProMotion).
 
 ---
 
@@ -164,7 +164,7 @@ npm -v
 ## 📬 Contact & Connect
 
 **Yoni Yonatan**  
-*Software Engineer & Creative Technologist*
+*Cybersecurity & Software Engineering*
 
 - **Website:** [yoniyonatan.com](https://yoniyonatan.com)
 - **Email:** [hello@yoniyonatan.com](mailto:hello@yoniyonatan.com)

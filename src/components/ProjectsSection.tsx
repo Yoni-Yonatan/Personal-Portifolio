@@ -4,7 +4,7 @@ interface Project {
   id: string;
   title: string;
   subtitle: string;
-  category: 'all' | 'fullstack' | 'systems' | 'ai-fintech';
+  category: 'all' | 'security' | 'software' | 'systems';
   description: string;
   metrics: { label: string; value: string }[];
   tags: string[];
@@ -17,36 +17,36 @@ interface Project {
 
 const CATEGORIES = [
   { id: 'all', label: 'All Projects' },
-  { id: 'fullstack', label: 'Full-Stack Apps' },
-  { id: 'systems', label: 'Systems & Cloud' },
-  { id: 'ai-fintech', label: 'Fintech & AI' },
+  { id: 'security', label: 'Cybersecurity & Defenses' },
+  { id: 'software', label: 'Software Engineering' },
+  { id: 'systems', label: 'Distributed Systems' },
 ];
 
 const PROJECTS: Project[] = [
   {
-    id: 'aethercloud',
-    title: 'AetherCloud AI',
-    subtitle: 'Autonomous Multi-Agent Orchestration & Cloud Engine',
-    category: 'ai-fintech',
+    id: 'aegisshield',
+    title: 'AegisShield SIEM',
+    subtitle: 'Automated Threat Detection & eBPF Runtime Security',
+    category: 'security',
     description:
-      'High-throughput distributed agent platform executing asynchronous workflows across hybrid cloud environments. Features real-time state synchronization, fault tolerance with Raft consensus, and predictive GPU auto-scaling.',
+      'Zero-trust runtime intrusion detection engine and cloud vulnerability scanner. Monitors kernel syscalls via eBPF, performs real-time deep packet inspection, and automates active incident quarantine in under 12ms.',
     metrics: [
-      { label: 'Throughput', value: '1.2M QPS' },
-      { label: 'SLA Reliability', value: '99.99%' },
-      { label: 'P99 Latency', value: '14ms' },
+      { label: 'Detection SLA', value: '< 12ms' },
+      { label: 'Rules Tested', value: '450+ CVEs' },
+      { label: 'Zero-Day Shield', value: 'Active' },
     ],
-    tags: ['Go', 'React', 'TypeScript', 'Docker', 'PostgreSQL', 'Redis'],
+    tags: ['Go', 'eBPF', 'Linux Kernel', 'Docker', 'React', 'TypeScript'],
     liveUrl: 'https://github.com/yoniyonatan',
     githubUrl: 'https://github.com/yoniyonatan',
-    accentColor: '#029BDF',
-    gradientBg: 'from-[#029BDF]/25 via-[#016896]/10 to-transparent',
+    accentColor: '#10B981',
+    gradientBg: 'from-[#10B981]/25 via-[#029BDF]/10 to-transparent',
     featured: true,
   },
   {
     id: 'vortexpay',
     title: 'VortexPay Gateway',
-    subtitle: 'High-Frequency Web3 & Multi-Currency Settlement Engine',
-    category: 'ai-fintech',
+    subtitle: 'High-Frequency Cryptographic Settlement Engine',
+    category: 'security',
     description:
       'Real-time payments and cross-border settlement infrastructure with sub-millisecond execution. Built on an event-driven architecture with cryptographic transaction validation and automated fraud detection pipelines.',
     metrics: [
@@ -62,10 +62,28 @@ const PROJECTS: Project[] = [
     featured: true,
   },
   {
+    id: 'aethercloud',
+    title: 'AetherSec Cloud',
+    subtitle: 'Autonomous Multi-Agent Orchestration & Cloud Defense',
+    category: 'systems',
+    description:
+      'High-throughput distributed agent platform executing asynchronous workflows across hybrid cloud environments. Features real-time state synchronization, fault tolerance with Raft consensus, and predictive GPU auto-scaling.',
+    metrics: [
+      { label: 'Throughput', value: '1.2M QPS' },
+      { label: 'SLA Reliability', value: '99.99%' },
+      { label: 'P99 Latency', value: '14ms' },
+    ],
+    tags: ['Go', 'React', 'TypeScript', 'Docker', 'PostgreSQL', 'Redis'],
+    liveUrl: 'https://github.com/yoniyonatan',
+    githubUrl: 'https://github.com/yoniyonatan',
+    accentColor: '#029BDF',
+    gradientBg: 'from-[#029BDF]/25 via-[#016896]/10 to-transparent',
+  },
+  {
     id: 'hyperscale',
     title: 'HyperScale DB',
     subtitle: 'Distributed Low-Latency In-Memory Storage Engine',
-    category: 'systems',
+    category: 'software',
     description:
       'Ultra-low latency memory cache and key-value datastore implemented with custom memory allocators, zero-copy serialization, and multi-region consensus replication for extreme workloads.',
     metrics: [
@@ -78,24 +96,6 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/yoniyonatan',
     accentColor: '#4f46e5',
     gradientBg: 'from-[#4f46e5]/25 via-[#6366F1]/10 to-transparent',
-  },
-  {
-    id: 'pulsestudio',
-    title: 'Pulse Studio',
-    subtitle: 'GPU-Accelerated WebGL Shader & Node Canvas Platform',
-    category: 'fullstack',
-    description:
-      'Browser-based creative engineering suite featuring node-based visual shader programming, real-time GLSL compilation, and particle physics simulations running at a locked 60 FPS.',
-    metrics: [
-      { label: 'Render Target', value: '60 FPS 4K' },
-      { label: 'Engine Core', value: 'WebGL 2.0' },
-      { label: 'Worker Pipeline', value: 'Multi-Thread' },
-    ],
-    tags: ['React', 'Three.js', 'WebGL', 'TypeScript', 'Tailwind'],
-    liveUrl: 'https://github.com/yoniyonatan',
-    githubUrl: 'https://github.com/yoniyonatan',
-    accentColor: '#10B981',
-    gradientBg: 'from-[#10B981]/25 via-[#029BDF]/10 to-transparent',
   },
 ];
 
