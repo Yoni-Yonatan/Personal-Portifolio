@@ -6,3 +6,4 @@ Host: https://yoniyonatan.com
 
 # Sitemaps
 Sitemap: https://yoniyonatan.com/sitemap.xml
+
