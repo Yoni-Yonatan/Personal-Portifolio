@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
+import confetti from 'canvas-confetti';
 import { useTypewriter } from '../hooks/useTypewriter';
+import { soundFX } from '../utils/soundEffects';
+import { CyberScrambleText } from './CyberScrambleText';
 
 const PILL_BUTTONS = [
   'Explore projects',
@@ -29,7 +32,6 @@ const FLOATING_TAGS: FloatingTag[] = [
     badge: 'SecOps & Defenses',
     glowColor: 'rgba(0, 229, 255, 0.9)',
     dotColor: '#00E5FF',
-    // Directly above the top of his hair
     className: 'top-[2%] sm:top-[4%] right-[6%] sm:right-[14%]',
     animationClass: 'animate-float-1',
   },
@@ -39,7 +41,6 @@ const FLOATING_TAGS: FloatingTag[] = [
     badge: 'Full-Stack Core',
     glowColor: 'rgba(1, 145, 235, 0.95)',
     dotColor: '#0191EB',
-    // Snug beside the left hair curve
     className: 'top-[15%] sm:top-[17%] right-[22%] sm:right-[38%]',
     animationClass: 'animate-float-2',
   },
@@ -49,7 +50,6 @@ const FLOATING_TAGS: FloatingTag[] = [
     badge: 'OWASP & Zero-Trust',
     glowColor: 'rgba(168, 85, 247, 0.85)',
     dotColor: '#A855F7',
-    // Snug beside the right hair curve
     className: 'top-[14%] sm:top-[16%] right-[2%] sm:right-[4%]',
     animationClass: 'animate-float-3',
   },
@@ -59,7 +59,6 @@ const FLOATING_TAGS: FloatingTag[] = [
     badge: 'Scalable Systems',
     glowColor: 'rgba(79, 70, 229, 0.95)',
     dotColor: '#4f46e5',
-    // Snug beside the right cheek / ear
     className: 'top-[35%] sm:top-[38%] right-[2%] sm:right-[2%]',
     animationClass: 'animate-float-1',
   },
@@ -69,7 +68,6 @@ const FLOATING_TAGS: FloatingTag[] = [
     badge: '⚡ PenTesting',
     glowColor: 'rgba(16, 185, 129, 0.85)',
     dotColor: '#10B981',
-    // Directly under his chin / collar
     className: 'top-[56%] sm:top-[60%] right-[6%] sm:right-[14%]',
     animationClass: 'animate-float-4',
   },
@@ -78,17 +76,23 @@ const FLOATING_TAGS: FloatingTag[] = [
 export function Hero({
   combinedColor = true,
   onNavigate,
+  onOpenTerminal,
+  onToggleMatrix,
 }: {
   combinedColor?: boolean;
   onNavigate?: (view: 'projects' | 'stack' | 'experience' | 'contact') => void;
+  onOpenTerminal?: () => void;
+  onToggleMatrix?: () => void;
 }) {
   const { displayed, done } = useTypewriter(TYPEWRITER_TEXT, 38, 600);
   const [buttonsVisible, setButtonsVisible] = useState(false);
   const [copied, setCopied] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [isMuted, setIsMuted] = useState(soundFX.getMuted());
 
   useEffect(() => {
-    // Action pill buttons become visible 400ms after page load, independent of typewriter
+    const unsub = soundFX.subscribe((muted) => setIsMuted(muted));
+
     const timer = setTimeout(() => {
       setButtonsVisible(true);
     }, 400);
@@ -109,6 +113,7 @@ export function Hero({
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
+      unsub();
       clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
       cancelAnimationFrame(rafId);
@@ -116,12 +121,23 @@ export function Hero({
   }, []);
 
   const handleCopyEmail = async () => {
+    soundFX.playSuccess();
+    try {
+      confetti({
+        particleCount: 55,
+        spread: 60,
+        origin: { y: 0.75 },
+        colors: ['#00E5FF', '#4f46e5', '#10B981', '#ffffff'],
+      });
+    } catch {
+      // ignore
+    }
+
     try {
       await navigator.clipboard.writeText('hello@yoniyonatan.com');
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback
       const textArea = document.createElement('textarea');
       textArea.value = 'hello@yoniyonatan.com';
       document.body.appendChild(textArea);
@@ -133,33 +149,110 @@ export function Hero({
     }
   };
 
+  const handlePillClick = (label: string) => {
+    soundFX.playClick();
+    if (label === 'Explore projects') {
+      if (onNavigate) onNavigate('projects');
+      else document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    } else if (label === 'View tech stack') {
+      if (onNavigate) onNavigate('stack');
+      else document.getElementById('stack')?.scrollIntoView({ behavior: 'smooth' });
+    } else if (label === 'Work experience') {
+      if (onNavigate) onNavigate('experience');
+      else document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
+    } else if (label === "Let's collaborate") {
+      if (onNavigate) onNavigate('contact');
+      else document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section id="hero" className="relative z-[1] h-screen w-full flex flex-col justify-end pb-16 md:justify-center md:pb-0 px-5 sm:px-8 md:px-12 overflow-hidden select-none">
-      {/* 1. Ultra-clean minimal top brand signature (no bulky navbar, transparent, no boundary) */}
-      <div
-        className="absolute top-6 sm:top-8 left-5 sm:left-10 z-20"
+    <section
+      id="hero"
+      className="relative z-[1] h-screen w-full flex flex-col justify-end pb-16 md:justify-center md:pb-0 px-5 sm:px-8 md:px-12 overflow-hidden select-none"
+    >
+      {/* 1. Top Brand Signature & Cyber Command Controls */}
+      <header
+        className="fixed top-0 left-0 right-0 z-30 px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between pointer-events-none transition-all duration-300"
         style={{
           opacity: Math.max(1 - scrollY / 300, 0),
           transform: `translateY(-${scrollY * 0.2}px)`,
         }}
       >
-        <div className="inline-flex items-center gap-2 group">
+        {/* Brand Logo (Left) */}
+        <div className="inline-flex items-center gap-2 group pointer-events-auto">
           <span
-            className="text-[18px] sm:text-[22px] tracking-tight text-white font-medium drop-shadow-md"
+            className="text-[18px] sm:text-[22px] tracking-tight text-white font-medium drop-shadow-md cursor-pointer hover:text-[#00E5FF] transition-colors"
             style={{ fontFamily: 'var(--font-heading)' }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             Yoni Yonatan®
           </span>
           <span
-            className="text-[18px] text-white/80 select-none leading-none"
+            className="text-[18px] text-[#00E5FF] select-none leading-none animate-spin"
+            style={{ animationDuration: '8s' }}
             aria-hidden="true"
           >
             ✳︎
           </span>
         </div>
-      </div>
 
-      {/* 2. Floating Spatial Thought Tags Around The Head (100% Transparent, No Boundary/Border) */}
+        {/* Action Controls & Interactive Pills (Right) */}
+        <div className="flex items-center gap-2 sm:gap-2.5 pointer-events-auto">
+          {/* Cyber Terminal Command Launcher Button */}
+          {onOpenTerminal && (
+            <button
+              type="button"
+              onClick={() => {
+                soundFX.playPowerUp();
+                onOpenTerminal();
+              }}
+              onMouseEnter={() => soundFX.playHover()}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-xl border border-[#00E5FF]/40 text-white text-xs font-mono font-medium transition-all duration-300 cursor-pointer shadow-[0_4px_16px_rgba(0,229,255,0.25)] hover:border-[#00E5FF] hover:scale-105"
+              title="Open Cyber Terminal HUD (⌘K)"
+            >
+              <span className="w-2 h-2 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] animate-pulse" />
+              <span>TERMINAL</span>
+              <span className="hidden md:inline px-1 py-0.2 rounded bg-white/10 text-[9px] text-[#00E5FF] border border-white/15">
+                ⌘K
+              </span>
+            </button>
+          )}
+
+          {/* Matrix Rain Toggle */}
+          {onToggleMatrix && (
+            <button
+              type="button"
+              onClick={() => {
+                soundFX.playClick();
+                onToggleMatrix();
+              }}
+              onMouseEnter={() => soundFX.playHover()}
+              className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-xl border border-white/20 text-white text-xs font-mono transition-all duration-200 cursor-pointer hover:border-[#10B981] hover:text-[#10B981]"
+              title="Toggle Matrix Digital Code Rain"
+            >
+              <span>⚡ MATRIX</span>
+            </button>
+          )}
+
+          {/* Procedural Sound FX Toggle */}
+          <button
+            type="button"
+            onClick={() => soundFX.toggleMute()}
+            onMouseEnter={() => soundFX.playHover()}
+            className={`px-2.5 py-1.5 rounded-full backdrop-blur-xl border text-xs font-mono transition-all duration-200 cursor-pointer ${
+              !isMuted
+                ? 'bg-white/20 border-white/40 text-white shadow-[0_0_10px_rgba(255,255,255,0.3)]'
+                : 'bg-black/50 border-white/15 text-white/50 hover:text-white'
+            }`}
+            title={isMuted ? 'Unmute procedural sound synthesizer' : 'Mute sound synthesizer'}
+          >
+            {!isMuted ? '🔊 SFX' : '🔇 SFX'}
+          </button>
+        </div>
+      </header>
+
+      {/* 2. Floating Spatial Thought Tags Around The Head */}
       <div
         className="absolute inset-0 pointer-events-none z-10 overflow-hidden"
         style={{
@@ -173,6 +266,7 @@ export function Hero({
           <div
             key={tag.id}
             className={`absolute ${tag.className} ${tag.animationClass} pointer-events-auto transition-all duration-300 hover:scale-105 z-20`}
+            onMouseEnter={() => soundFX.playHover()}
           >
             <div
               className="relative inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-black/45 backdrop-blur-xl border border-white/20 cursor-default group hover:border-white/50 hover:bg-black/60 transition-all duration-300"
@@ -200,7 +294,7 @@ export function Hero({
         ))}
       </div>
 
-      {/* 3. Main Hero Typography & Call-To-Actions with 3D Depth on Scroll */}
+      {/* 3. Hero Main Content Area: Typography & Actions with 3D Depth on Scroll */}
       <div
         className="max-w-xl relative z-20"
         style={{
@@ -210,23 +304,27 @@ export function Hero({
           willChange: 'transform, opacity',
         }}
       >
-        {/* Crisp prestigious status badge & headline */}
+        {/* Status Badge */}
         <div className="mb-4 sm:mb-5">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/20 text-white text-xs sm:text-[13px] font-medium tracking-wide mb-3 shadow-lg">
+          <div
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white text-xs sm:text-[13px] font-medium tracking-wide mb-3 shadow-lg hover:border-[#00E5FF]/50 transition-colors cursor-default"
+            onMouseEnter={() => soundFX.playHover()}
+          >
             <span className="w-2 h-2 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] animate-pulse" />
             <span className="text-white/90">Available for High-Impact Roles & Contracts</span>
           </div>
+
           <h1
             className="text-white tracking-tight leading-tight font-medium"
             style={{
-              fontSize: 'clamp(24px, 4.4vw, 36px)',
+              fontSize: 'clamp(26px, 4.6vw, 42px)',
               fontFamily: 'var(--font-heading)',
               textShadow: '0 4px 20px rgba(0,0,0,0.3)',
             }}
           >
             Meet <span className="font-semibold text-white">Yoni Yonatan</span>
-            <span className="block text-white/80 font-normal text-[0.72em] mt-1 tracking-normal">
-              Best Software Engineer & Cybersecurity Specialist
+            <span className="block text-[#00E5FF] font-medium text-[0.68em] mt-1.5 tracking-wide uppercase font-mono">
+              <CyberScrambleText text="Best Software Engineer & Cybersecurity Specialist" />
             </span>
           </h1>
         </div>
@@ -235,8 +333,8 @@ export function Hero({
         <p
           className="text-white/95 mb-6 sm:mb-7 font-normal"
           style={{
-            fontSize: 'clamp(16px, 3.2vw, 20px)',
-            lineHeight: 1.45,
+            fontSize: 'clamp(15px, 2.8vw, 19px)',
+            lineHeight: 1.5,
             minHeight: '56px',
             textShadow: '0 2px 10px rgba(0,0,0,0.3)',
           }}
@@ -257,35 +355,17 @@ export function Hero({
               ? 'opacity-100 translate-y-0'
               : 'opacity-0 translate-y-2 pointer-events-none'
           }`}
-          style={{
-            transitionProperty: 'opacity, transform',
-            transitionDuration: '0.4s',
-            transitionTimingFunction: 'ease',
-          }}
         >
           {/* White pill buttons */}
           {PILL_BUTTONS.map((label) => (
             <button
               key={label}
               type="button"
-              onClick={() => {
-                if (label === 'Explore projects') {
-                  if (onNavigate) onNavigate('projects');
-                  else document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-                } else if (label === 'View tech stack') {
-                  if (onNavigate) onNavigate('stack');
-                  else document.getElementById('stack')?.scrollIntoView({ behavior: 'smooth' });
-                } else if (label === 'Work experience') {
-                  if (onNavigate) onNavigate('experience');
-                  else document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
-                } else if (label === "Let's collaborate") {
-                  if (onNavigate) onNavigate('contact');
-                  else document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-              className={`inline-flex items-center justify-center bg-white font-medium border border-transparent rounded-full text-[13px] sm:text-[15px] px-4 sm:px-5 py-[0.3em] mx-[0.2em] mb-[0.4em] whitespace-nowrap transition-all duration-300 cursor-pointer shadow-[0_8px_25px_rgba(0,0,0,0.15)] active:scale-95 ${
+              onClick={() => handlePillClick(label)}
+              onMouseEnter={() => soundFX.playHover()}
+              className={`inline-flex items-center justify-center bg-white font-medium border border-transparent rounded-full text-[13px] sm:text-[15px] px-4 sm:px-5 py-[0.35em] mx-[0.2em] mb-[0.4em] whitespace-nowrap transition-all duration-300 cursor-pointer shadow-[0_8px_25px_rgba(0,0,0,0.15)] active:scale-95 ${
                 combinedColor
-                  ? 'text-[#0191EB] hover:text-[#4f46e5] hover:shadow-[0_10px_25px_rgba(79,70,229,0.3)] hover:scale-105'
+                  ? 'text-[#0191EB] hover:text-[#4f46e5] hover:shadow-[0_10px_25px_rgba(79,70,229,0.4)] hover:scale-105'
                   : 'text-[#0191EB] hover:bg-white/90 hover:scale-105'
               }`}
             >
@@ -293,12 +373,13 @@ export function Hero({
             </button>
           ))}
 
-          {/* Outline pill button */}
+          {/* Email Copy Pill Button */}
           <button
             type="button"
             onClick={handleCopyEmail}
+            onMouseEnter={() => soundFX.playHover()}
             title="Click to copy email address"
-            className={`inline-flex items-center justify-center text-white bg-white/10 backdrop-blur-md border border-white/35 rounded-full text-[13px] sm:text-[15px] px-4 sm:px-5 py-[0.3em] mx-[0.2em] mb-[0.4em] whitespace-nowrap gap-2 sm:gap-3 transition-all duration-300 cursor-pointer relative group shadow-lg active:scale-95 font-medium ${
+            className={`inline-flex items-center justify-center text-white bg-white/10 backdrop-blur-md border border-white/35 rounded-full text-[13px] sm:text-[15px] px-4 sm:px-5 py-[0.35em] mx-[0.2em] mb-[0.4em] whitespace-nowrap gap-2 sm:gap-3 transition-all duration-300 cursor-pointer relative group shadow-lg active:scale-95 font-medium ${
               combinedColor
                 ? 'hover:bg-white hover:text-[#4f46e5] hover:border-white hover:shadow-[0_0_20px_rgba(79,70,229,0.4)]'
                 : 'hover:bg-white hover:text-[#0191EB]'
@@ -306,12 +387,12 @@ export function Hero({
           >
             <span>
               Reach me:{' '}
-              <span className="underline underline-offset-1">
+              <span className="underline underline-offset-1 font-mono text-[0.95em]">
                 hello@yoniyonatan.com
               </span>
             </span>
 
-            {/* 12x12 copy icon */}
+            {/* Copy Icon */}
             <svg
               width="12"
               height="12"
@@ -330,46 +411,23 @@ export function Hero({
 
             {/* Copied indicator tooltip */}
             {copied && (
-              <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-white text-black text-[11px] font-medium px-2 py-0.5 rounded shadow pointer-events-none animate-fade-in">
-                Copied!
+              <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#00E5FF] text-black text-[11px] font-bold px-2 py-0.5 rounded shadow pointer-events-none animate-fade-in font-mono">
+                Copied! ✓
               </span>
             )}
           </button>
         </div>
       </div>
 
-      {/* 4. Seamless Bottom Transition Veil into Projects */}
+      {/* 4. Bottom Blend Gradient into Next Section */}
       <div
-        className="absolute inset-x-0 bottom-0 h-44 sm:h-60 pointer-events-none z-10"
+        className="absolute inset-x-0 bottom-0 h-32 sm:h-44 pointer-events-none z-10"
         style={{
           background: combinedColor
             ? 'linear-gradient(to bottom, transparent 0%, rgba(1, 145, 235, 0.4) 40%, rgba(1, 145, 235, 0.85) 75%, #0191EB 100%)'
             : 'linear-gradient(to bottom, transparent 0%, rgba(1, 145, 235, 0.45) 40%, rgba(1, 145, 235, 0.9) 75%, #0191EB 100%)',
         }}
       />
-
-      {/* 5. Sleek 3D Scroll Cue */}
-      <div
-        onClick={() => {
-          if (onNavigate) {
-            onNavigate('projects');
-          } else {
-            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-          }
-        }}
-        className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 cursor-pointer group flex flex-col items-center gap-1.5 transition-all duration-300"
-        style={{
-          opacity: Math.max(1 - scrollY / 200, 0),
-          pointerEvents: scrollY > 200 ? 'none' : 'auto',
-        }}
-      >
-        <span className="text-[11px] tracking-[0.22em] uppercase text-white/70 font-semibold group-hover:text-white transition-colors">
-          Explore Projects
-        </span>
-        <div className="w-5 h-8 rounded-full border border-white/35 flex items-start justify-center p-1 backdrop-blur-md bg-white/10 group-hover:border-white/70 shadow-lg">
-          <div className="w-1.5 h-2 bg-white rounded-full animate-bounce" />
-        </div>
-      </div>
     </section>
   );
 }

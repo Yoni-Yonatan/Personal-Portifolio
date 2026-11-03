@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BackgroundVideo } from './components/BackgroundVideo';
 import { Hero } from './components/Hero';
 import { ProjectsSection } from './components/ProjectsSection';
@@ -7,9 +7,30 @@ import { ExperienceSection } from './components/ExperienceSection';
 import { ContactSection } from './components/ContactSection';
 import { Scroll3DSection } from './components/Scroll3DSection';
 import { FloatingNavHUD } from './components/FloatingNavHUD';
+import { KineticTicker } from './components/KineticTicker';
+import { CyberTerminalModal } from './components/CyberTerminalModal';
+import { MatrixRainOverlay } from './components/MatrixRainOverlay';
+import { CustomCursor } from './components/CustomCursor';
+import { soundFX } from './utils/soundEffects';
 
 export function App() {
   const [isCombinedColor] = useState(true);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [isMatrixOpen, setIsMatrixOpen] = useState(false);
+
+  // Global Keyboard Shortcuts (⌘K / Ctrl+K for Cyber Terminal, Esc for close)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        soundFX.playPowerUp();
+        setIsTerminalOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <main
@@ -19,16 +40,29 @@ export function App() {
           : 'bg-[#0191EB] selection:bg-white selection:text-[#0191EB]'
       }`}
     >
-      {/* Fixed Fullscreen Background Video with Interactive Scrubbing */}
+      {/* Hardware-Accelerated Cyber Cursor & Spotlight Follower */}
+      <CustomCursor />
+
+      {/* Fixed Fullscreen Background Video with Interactive Mouse Scrubbing */}
       <BackgroundVideo combinedColor={isCombinedColor} />
 
-      {/* Hero Section */}
-      <Hero combinedColor={isCombinedColor} />
+      {/* Interactive Hero with 3D Quantum Defense Core & Command Bar */}
+      <Hero
+        combinedColor={isCombinedColor}
+        onOpenTerminal={() => setIsTerminalOpen(true)}
+        onToggleMatrix={() => setIsMatrixOpen((prev) => !prev)}
+      />
 
-      {/* 3D Spatial Scroll Section 1: Flagship Projects */}
+      {/* High-Impact Kinetic Marquee Ticker 1 */}
+      <KineticTicker speed={38} className="my-0" />
+
+      {/* 3D Spatial Scroll Section 1: Flagship Projects & Live Architecture */}
       <Scroll3DSection id="projects">
         <ProjectsSection combinedColor={isCombinedColor} />
       </Scroll3DSection>
+
+      {/* High-Impact Kinetic Marquee Ticker 2 (Reverse direction) */}
+      <KineticTicker speed={42} reverse={true} className="my-0" />
 
       {/* 3D Spatial Scroll Section 2: Technical Skills Constellation */}
       <Scroll3DSection id="stack">
@@ -46,7 +80,24 @@ export function App() {
       </Scroll3DSection>
 
       {/* Luxury 3D Floating Journey HUD Navigator */}
-      <FloatingNavHUD combinedColor={isCombinedColor} />
+      <FloatingNavHUD
+        combinedColor={isCombinedColor}
+        onOpenTerminal={() => setIsTerminalOpen(true)}
+        onToggleMatrix={() => setIsMatrixOpen((prev) => !prev)}
+      />
+
+      {/* Full-Screen Matrix Digital Code Rain Stream */}
+      <MatrixRainOverlay
+        isOpen={isMatrixOpen}
+        onClose={() => setIsMatrixOpen(false)}
+      />
+
+      {/* Interactive Cyber Command Terminal Modal (⌘K) */}
+      <CyberTerminalModal
+        isOpen={isTerminalOpen}
+        onClose={() => setIsTerminalOpen(false)}
+        onToggleMatrix={() => setIsMatrixOpen((prev) => !prev)}
+      />
     </main>
   );
 }

@@ -26,38 +26,40 @@ Engineered from first principles, this portfolio showcases resilient software ar
 
 ## ✨ Key Features
 
+### ⚡ Cyber Decryption Typography & Kinetic Marquee
+- **Matrix Scramble Text Animation**: Titles, badges, and headings feature real-time letter-by-letter glyph decryption (`01`, `λ`, `✦`, `§`, `Ψ`, `Ω`, `⚡`) on mount and hover.
+- **Velocity-Responsive Kinetic Marquee**: Dual-stream infinite typography marquee that dynamically accelerates in response to user scroll velocity.
+
+### 🖥️ Interactive Cyber Defense Terminal (`⌘K` / `Ctrl+K`)
+- **Authentic Hacker CLI**: Keyboard-first diagnostic terminal featuring CRT scanline aesthetics, command history, and reactive sound synthesis.
+- **Diagnostic Commands**:
+  - `audit`: Executes an interactive zero-trust vulnerability and kernel eBPF tracepoint assessment.
+  - `matrix`: Toggles full-screen streaming digital code rain.
+  - `benchmark`: Analyzes real-time client heap allocation, GPU acceleration, and refresh rate lock.
+  - `skills`: Generates an ASCII architecture topology map.
+  - `sound`: Toggles procedural audio synthesis.
+
+### 🔊 Procedural Web Audio API Sound Synthesizer
+- **Zero Asset Overhead**: 100% synthesized procedural sound effects using native Web Audio API oscillators and gain envelopes.
+- **Interactive Audio Feedback**: Tactile mechanical clicks, soft 1200Hz cyber blips, power-up hums, and pentatonic completion chimes with global mute memory (`localStorage`).
+
+### 🏛️ Interactive System Topology Blueprint Inspector
+- **Flagship Project Deep Dive**: Click "⚡ ARCHITECTURE" on any project card to open an interactive system flow blueprint.
+- **Live Pipeline Flow**: Visualizes packet transit from Edge Anycast WAF → eBPF Kernel Gateway → Zero-Trust mTLS Mesh → Raft Distributed Cluster.
+- **Interactive Telemetry**: Real-time throughput (1.2M+ QPS), sub-millisecond latency readouts, and cipher specs.
+
 ### 🎬 Interactive Mouse & Touch Video Scrubbing
 - **Real-Time Video Timeline Scrubbing**: The background video responds fluidly to mouse horizontal velocity and mobile touch gestures with sensitivity-controlled playback seeking.
 - **Dynamic Scroll Atmosphere**: As the user scrolls from the Hero into the portfolio content, the video smoothly dims and deepens, transforming into a subtle ambient living canvas.
 - **Dual-Tone Color Grading**: Real-time color overlay grading blending Electric Azure (`#0191EB`) and Deep Indigo (`#4f46e5`) with radial soft-light ambient auras.
 
-### 🌌 3D Spatial Scroll Engine
+### 🌌 3D Spatial Scroll Engine & Holographic Cards
 - **Hardware-Accelerated Perspective**: Custom `Scroll3DSection` component implementing mathematical 3D spatial tilt and depth transforms using `requestAnimationFrame`.
-- **Zero Jitter & Crisp Typography**: Fully decoupled from CSS transition fighting and free of blur filters, ensuring text, cards, and diagrams remain pin-sharp at all times.
-- **Seamless Continuous Gradients**: Carefully calculated section boundaries that flow uninterrupted down the viewport with zero margin gaps.
-
-### ⚡ Interactive Hero Experience
-- **Fluid Typewriter Hook**: Customizable speed and delay typewriter delivering the core engineering thesis.
-- **Spatial Thought Orbit**: Transparent, floating skill tags orbitally positioned around the subject with independent floating physics and hover scaling.
-- **Quick Action Pills**: Direct smooth-scrolling pills and a one-click clipboard copy widget with animated feedback tooltip.
-
-### 🔮 Interactive Skills Constellation
-- **3D Physics Tilting Badges**: Custom interactive `TiltBadge` components with dynamic vector math calculating 3D tilt angles based on cursor offset.
-- **Category Filter Pipeline**: Filter across Frontend, Backend, Databases, and DevOps with fluid opacity transitions.
-- **Active Node Inspector**: Real-time inspector footer surfacing detailed metadata for highlighted technologies.
-
-### 🚀 Flagship Project Showcase
-- **Curated Engineering Case Studies**: Systems including **AetherCloud AI** (1.2M QPS distributed orchestration), **VortexPay Gateway** (sub-millisecond settlement engine), and **HyperScale DB** (zero-copy memory datastore).
-- **Architecture Metrics**: Performance metrics (QPS, SLA, P99 Latency) surfaced directly on each card.
-- **Direct GitHub & Live Previews**: Fast navigation to repositories and deployments.
-
-### ⏳ Career Milestones Timeline
-- **Electric Energy Stream**: Vertical neon conduit featuring an animated streaming energy beam connecting career milestones.
-- **Interactive Node Selection**: Alternating desktop timeline cards with real-time selection states and illuminated beacon nodes.
+- **Holographic Specular Glare**: Project cards dynamically track cursor coordinates, calculating 3D tilt angles and rendering a radiant radial specular reflection.
+- **Precision Custom Cursor**: Trailing cyber halo with auto-expansion over clickable targets and touch-screen safety.
 
 ### 🧭 Floating Journey HUD Navigator
-- **Glassmorphic Navigation Bar**: Ultra-modern floating HUD featuring live scroll percentage tracking and one-tap section jumping.
-- **Scroll Spy**: Auto-detects the active viewport section and highlights navigation pills dynamically.
+- **Glassmorphic Navigation Bar**: Ultra-modern floating HUD featuring live scroll percentage tracking, one-tap section jumping, and one-click `⌘K` terminal access.
 
 ---
 
@@ -68,6 +70,7 @@ Engineered from first principles, this portfolio showcases resilient software ar
 | **Frontend Framework** | [React 19](https://react.dev/) | Latest React core with optimized concurrent rendering |
 | **Language** | [TypeScript](https://www.typescriptlang.org/) | Strict type safety across all components and data models |
 | **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) | Next-generation utility-first styling with high-performance compiler |
+| **Audio Synthesis** | Web Audio API | Zero-overhead mathematical procedural synthesizer (clicks, blips, chimes) |
 | **Build Tool** | [Vite 8](https://vitejs.dev/) | Ultra-fast HMR and optimized Rollup production bundling |
 | **Linter** | [Oxlint](https://oxc.rs/) | Rust-powered high-performance JavaScript/TypeScript linter |
 | **Deployment** | [Vercel](https://vercel.com/) | Edge-optimized continuous deployment with zero-config |
@@ -85,18 +88,25 @@ Personal-Portifolio/
 ├── src/
 │   ├── assets/                 # Icons, images, and branding assets
 │   ├── components/             # Modular React components
+│   │   ├── ArchitectureModal.tsx # Interactive system topology blueprint inspector
 │   │   ├── BackgroundVideo.tsx # Fixed interactive scrubbing video & ambient tint
-│   │   ├── Hero.tsx            # Hero section, typewriter, orbital tags & CTA pills
-│   │   ├── ProjectsSection.tsx # Flagship project showcase with metrics & filters
-│   │   ├── SkillsSection.tsx   # Interactive 3D tilt constellation & tech stack
+│   │   ├── CustomCursor.tsx    # Hardware-accelerated cyber cursor & spotlight
+│   │   ├── CyberScrambleText.tsx # Matrix decryption typography animator
+│   │   ├── CyberTerminalModal.tsx # Interactive hacker diagnostic CLI (⌘K)
 │   │   ├── ExperienceSection.tsx # Interactive career timeline with electric stream
-│   │   ├── ContactSection.tsx  # Interactive contact form & direct reach channels
-│   │   ├── Scroll3DSection.tsx # 3D spatial perspective scroll container
 │   │   ├── FloatingNavHUD.tsx  # Floating glassmorphic navigation controller
+│   │   ├── Hero.tsx            # Hero section, typewriter, 3D Core, orbital tags & CTA pills
+│   │   ├── KineticTicker.tsx   # Velocity-responsive typography marquee
+│   │   ├── MatrixRainOverlay.tsx # Fullscreen falling digital code rain
 │   │   ├── Navbar.tsx          # Minimal top brand navigation
+│   │   ├── ProjectsSection.tsx # Flagship project showcase with 3D holographic tilt
+│   │   ├── Scroll3DSection.tsx # 3D spatial perspective scroll container
+│   │   ├── SkillsSection.tsx   # Interactive 3D tilt constellation & tech stack
 │   │   └── TechIcons.tsx       # SVG vector icon collection for tech stack
 │   ├── hooks/
 │   │   └── useTypewriter.ts    # Custom typewriter effect hook
+│   ├── utils/
+│   │   └── soundEffects.ts     # Procedural Web Audio API sound synthesizer
 │   ├── vid/                    # Background MP4 video media
 │   ├── App.tsx                 # Root layout & section composition
 │   ├── index.css               # Global theme tokens, keyframes & Tailwind imports

@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { soundFX } from '../utils/soundEffects';
+import { CyberScrambleText } from './CyberScrambleText';
 
 interface ExperienceItem {
   id: string;
@@ -119,8 +121,11 @@ export function ExperienceSection({
 
       {/* Section Header */}
       <div className={`relative z-10 max-w-5xl mx-auto text-center ${inStage ? 'mb-8 sm:mb-10' : 'mb-16'}`}>
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/25 bg-white/15 backdrop-blur-md text-white text-[13px] tracking-widest uppercase mb-4 shadow-lg">
-          <span className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_white] animate-pulse" />
+        <div
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/25 bg-white/15 backdrop-blur-md text-white text-[13px] tracking-widest uppercase mb-4 shadow-lg cursor-default"
+          onMouseEnter={() => soundFX.playHover()}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] animate-pulse" />
           Career Milestones & Trajectory
         </div>
 
@@ -128,7 +133,7 @@ export function ExperienceSection({
           className="text-3xl sm:text-5xl font-medium tracking-tight text-white mb-4"
           style={{ fontFamily: 'var(--font-heading)' }}
         >
-          Work Experience & Impact
+          <CyberScrambleText text="Work Experience & Impact" />
         </h2>
 
         <p className="text-white/90 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
@@ -158,7 +163,11 @@ export function ExperienceSection({
             return (
               <div
                 key={exp.id}
-                onClick={() => setActiveItem(exp.id)}
+                onClick={() => {
+                  setActiveItem(exp.id);
+                  soundFX.playClick();
+                }}
+                onMouseEnter={() => soundFX.playHover()}
                 className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-0 cursor-pointer group`}
               >
                 {/* Left / Right Card Placement */}
@@ -183,7 +192,7 @@ export function ExperienceSection({
                       }`}
                     >
                       <span
-                        className="px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase border border-white/20"
+                        className="px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase border border-white/20 font-mono"
                         style={{
                           backgroundColor: `${exp.accentColor}20`,
                           color: exp.accentColor,
@@ -207,21 +216,21 @@ export function ExperienceSection({
 
                     {/* Company */}
                     <div
-                      className="text-sm font-semibold tracking-wide mb-4"
+                      className="text-sm font-semibold tracking-wide mb-4 font-mono"
                       style={{ color: exp.accentColor }}
                     >
                       {exp.company}
                     </div>
 
                     {/* Description */}
-                    <p className="text-white/75 text-sm sm:text-[14.5px] leading-relaxed mb-5">
+                    <p className="text-white/80 text-sm sm:text-[14.5px] leading-relaxed mb-5 font-normal">
                       {exp.description}
                     </p>
 
                     {/* Key Achievements */}
                     <div className="flex flex-col gap-2.5 mb-5 text-left">
                       {exp.achievements.map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-white/80">
+                        <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-white/85">
                           <span
                             className="mt-1 w-1.5 h-1.5 rounded-full shrink-0"
                             style={{
@@ -243,7 +252,7 @@ export function ExperienceSection({
                       {exp.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-2.5 py-0.5 rounded-full text-[11px] font-medium text-white/70 bg-white/5 border border-white/10"
+                          className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium text-white/75 bg-white/5 border border-white/10"
                         >
                           {skill}
                         </span>
@@ -252,7 +261,7 @@ export function ExperienceSection({
                   </div>
                 </div>
 
-                {/* Beacon Node (visible on mobile and desktop) */}
+                {/* Beacon Node */}
                 <div className="flex absolute left-4 sm:left-6 md:left-1/2 -translate-x-1/2 top-8 md:top-auto items-center justify-center z-10">
                   <div
                     className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-white flex items-center justify-center transition-all duration-300 ${

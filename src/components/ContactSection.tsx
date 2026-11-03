@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import confetti from 'canvas-confetti';
+import { soundFX } from '../utils/soundEffects';
+import { CyberScrambleText } from './CyberScrambleText';
 
 const PROJECT_TYPES = [
   'Cybersecurity Audit',
@@ -25,7 +28,6 @@ export function ContactSection({
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      // Format to user local or UTC+3
       const timeStr = now.toLocaleTimeString('en-US', {
         timeZone: 'Africa/Addis_Ababa',
         hour: '2-digit',
@@ -42,6 +44,18 @@ export function ContactSection({
   }, []);
 
   const handleCopyEmail = async () => {
+    soundFX.playSuccess();
+    try {
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.8 },
+        colors: ['#00E5FF', '#4f46e5', '#10B981'],
+      });
+    } catch {
+      // ignore
+    }
+
     const emailToCopy = 'hello@yoniyonatan.com';
     try {
       await navigator.clipboard.writeText(emailToCopy);
@@ -63,8 +77,22 @@ export function ContactSection({
     e.preventDefault();
     if (!name.trim() || !email.trim() || !message.trim()) return;
 
+    soundFX.playPowerUp();
     setFormState('sending');
+
     setTimeout(() => {
+      soundFX.playSuccess();
+      try {
+        confetti({
+          particleCount: 90,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#00E5FF', '#10B981', '#4f46e5', '#ffffff'],
+        });
+      } catch {
+        // ignore
+      }
+
       setFormState('success');
       setName('');
       setEmail('');
@@ -105,12 +133,15 @@ export function ContactSection({
         {/* Section Header */}
         <div className={`text-center max-w-3xl mx-auto ${inStage ? 'mb-8 sm:mb-10' : 'mb-16'}`}>
           {/* Availability Status Pill */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/25 bg-white/15 backdrop-blur-md mb-5 shadow-lg">
+          <div
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/25 bg-white/15 backdrop-blur-md mb-5 shadow-lg cursor-default"
+            onMouseEnter={() => soundFX.playHover()}
+          >
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white shadow-[0_0_10px_white]" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E5FF] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00E5FF] shadow-[0_0_10px_#00E5FF]" />
             </span>
-            <span className="text-xs sm:text-sm font-medium text-white">
+            <span className="text-xs sm:text-sm font-medium text-white font-mono">
               Available for Cybersecurity & Software Engineering Roles
             </span>
           </div>
@@ -119,10 +150,7 @@ export function ContactSection({
             className="text-3xl sm:text-5xl md:text-6xl font-medium tracking-tight text-white mb-5"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            Let&apos;s build and defend <br className="hidden sm:inline" />
-            <span className="text-white drop-shadow-md">
-              something extraordinary.
-            </span>
+            <CyberScrambleText text="Let's build and defend something extraordinary." />
           </h2>
 
           <p className="text-white/90 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
@@ -137,10 +165,10 @@ export function ContactSection({
           <div className="lg:col-span-5 flex flex-col gap-6">
             {/* Email Direct Card */}
             <div className="rounded-3xl p-7 bg-white/[0.08] border border-white/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-2">
+              <div className="text-xs font-semibold uppercase tracking-wider text-white/70 mb-2 font-mono">
                 Direct Electronic Mail
               </div>
-              <div className="text-xl sm:text-2xl font-medium text-white tracking-tight mb-4">
+              <div className="text-xl sm:text-2xl font-medium text-white tracking-tight mb-4 font-mono">
                 hello@yoniyonatan.com
               </div>
 
@@ -148,6 +176,7 @@ export function ContactSection({
                 <button
                   type="button"
                   onClick={handleCopyEmail}
+                  onMouseEnter={() => soundFX.playHover()}
                   className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 cursor-pointer shadow-lg active:scale-95 ${
                     combinedColor
                       ? 'bg-white text-[#4f46e5] hover:bg-white/95 hover:shadow-[0_0_20px_rgba(79,70,229,0.5)] hover:scale-105 font-semibold'
@@ -172,6 +201,7 @@ export function ContactSection({
 
                 <a
                   href="mailto:hello@yoniyonatan.com"
+                  onMouseEnter={() => soundFX.playHover()}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium text-white bg-white/5 border border-white/20 hover:bg-white/15 transition-all duration-200 cursor-pointer"
                 >
                   <span>Open Mail Client</span>
@@ -193,8 +223,8 @@ export function ContactSection({
 
             {/* Social Channels Card */}
             <div className="rounded-3xl p-7 bg-white/[0.03] border border-white/15 backdrop-blur-md">
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/60 mb-4">
-                Verified Socials & Code
+              <div className="text-xs font-semibold uppercase tracking-wider text-white/60 mb-4 font-mono">
+                Verified Socials & Repositories
               </div>
 
               <div className="grid grid-cols-2 gap-3">
@@ -225,6 +255,7 @@ export function ContactSection({
                     href={s.url}
                     target="_blank"
                     rel="noreferrer"
+                    onMouseEnter={() => soundFX.playHover()}
                     className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#00E5FF]/60 hover:bg-white/[0.07] transition-all duration-200 cursor-pointer group"
                   >
                     <div className="text-xs font-semibold text-white group-hover:text-[#00E5FF] transition-colors">
@@ -241,10 +272,10 @@ export function ContactSection({
             {/* Live Timezone Indicator */}
             <div className="rounded-3xl p-5 bg-white/[0.02] border border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-[#029BDF] shadow-[0_0_8px_#029BDF]" />
-                <span className="text-xs text-white/70 font-medium">Addis Ababa (EAT UTC+3)</span>
+                <span className="w-2 h-2 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] animate-pulse" />
+                <span className="text-xs text-white/70 font-medium font-mono">Addis Ababa (EAT UTC+3)</span>
               </div>
-              <span className="font-mono text-xs font-semibold text-white tracking-widest bg-white/5 px-2.5 py-1 rounded-lg border border-white/10">
+              <span className="font-mono text-xs font-semibold text-[#00E5FF] tracking-widest bg-black/40 px-2.5 py-1 rounded-lg border border-white/10">
                 {currentTime || '12:00:00 AM'}
               </span>
             </div>
@@ -256,13 +287,13 @@ export function ContactSection({
               onSubmit={handleSubmit}
               className="rounded-3xl p-7 sm:p-9 bg-white/[0.07] border border-white/20 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col gap-6"
             >
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/70">
+              <div className="text-xs font-semibold uppercase tracking-wider text-white/70 font-mono">
                 Dispatch A Project Inquiry
               </div>
 
               {/* Service / Project Type Selector */}
               <div>
-                <label className="block text-xs font-medium text-white/75 mb-2.5">
+                <label className="block text-xs font-medium text-white/75 mb-2.5 font-mono">
                   Scope of Interest
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -270,7 +301,11 @@ export function ContactSection({
                     <button
                       key={type}
                       type="button"
-                      onClick={() => setSelectedType(type)}
+                      onClick={() => {
+                        setSelectedType(type);
+                        soundFX.playClick();
+                      }}
+                      onMouseEnter={() => soundFX.playHover()}
                       className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer ${
                         selectedType === type
                           ? combinedColor
@@ -288,7 +323,7 @@ export function ContactSection({
               {/* Name & Email Fields */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-white/75 mb-1.5">
+                  <label className="block text-xs font-medium text-white/75 mb-1.5 font-mono">
                     Your Name
                   </label>
                   <input
@@ -302,7 +337,7 @@ export function ContactSection({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-white/75 mb-1.5">
+                  <label className="block text-xs font-medium text-white/75 mb-1.5 font-mono">
                     Email Address
                   </label>
                   <input
@@ -318,7 +353,7 @@ export function ContactSection({
 
               {/* Message Field */}
               <div>
-                <label className="block text-xs font-medium text-white/75 mb-1.5">
+                <label className="block text-xs font-medium text-white/75 mb-1.5 font-mono">
                   Project Details or Message
                 </label>
                 <textarea
@@ -335,7 +370,8 @@ export function ContactSection({
               <button
                 type="submit"
                 disabled={formState === 'sending' || formState === 'success'}
-                className={`w-full py-3.5 px-6 rounded-2xl font-medium text-sm tracking-wide transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xl ${
+                onMouseEnter={() => soundFX.playHover()}
+                className={`w-full py-3.5 px-6 rounded-2xl font-medium text-sm tracking-wide transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xl font-mono ${
                   formState === 'success'
                     ? 'bg-[#10B981] text-white shadow-[0_0_20px_rgba(16,185,129,0.4)]'
                     : combinedColor
@@ -345,7 +381,7 @@ export function ContactSection({
               >
                 {formState === 'sending' && (
                   <>
-                    <span className="w-4 h-4 rounded-full border-2 border-[#010e1a] border-t-transparent animate-spin" />
+                    <span className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
                     <span>Transmitting Message...</span>
                   </>
                 )}
@@ -364,7 +400,7 @@ export function ContactSection({
                     >
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span>Message Dispatched Successfully!</span>
+                    <span>Transmission Dispatched Successfully!</span>
                   </>
                 )}
 
@@ -391,9 +427,9 @@ export function ContactSection({
           </div>
         </div>
 
-        {/* Global Footer (only shown in standalone view) */}
+        {/* Global Footer */}
         {!inStage && (
-          <div className="mt-24 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
+          <div className="mt-24 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60 font-mono">
             <div className="flex items-center gap-2">
               <span className="font-medium text-white">Yoni Yonatan®</span>
               <span>—</span>
@@ -402,8 +438,12 @@ export function ContactSection({
 
             <button
               type="button"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center gap-1.5 text-white/75 hover:text-white transition-colors cursor-pointer"
+              onClick={() => {
+                soundFX.playClick();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onMouseEnter={() => soundFX.playHover()}
+              className="inline-flex items-center gap-1.5 text-white/75 hover:text-[#00E5FF] transition-colors cursor-pointer"
             >
               <span>Return to top</span>
               <svg

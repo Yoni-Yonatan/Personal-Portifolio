@@ -1,60 +1,64 @@
 import { useState } from 'react';
 import { TechIcons } from './TechIcons';
+import { soundFX } from '../utils/soundEffects';
+import { CyberScrambleText } from './CyberScrambleText';
 
 interface TechItem {
   id: string;
   name: string;
   category: 'frontend' | 'backend' | 'database' | 'devops' | 'security';
   glowColor: string;
+  level?: string;
+  role?: string;
 }
 
 const TIER_1: TechItem[] = [
-  { id: 'shield', name: 'Cybersecurity', category: 'security', glowColor: '#00E5FF' },
-  { id: 'penetration', name: 'Penetration Testing', category: 'security', glowColor: '#10B981' },
-  { id: 'cryptography', name: 'Cryptography & Auth', category: 'security', glowColor: '#A855F7' },
-  { id: 'network', name: 'Network Security', category: 'security', glowColor: '#0191EB' },
-  { id: 'linux', name: 'Linux Hardening', category: 'security', glowColor: '#FBBF24' },
-  { id: 'typescript', name: 'TypeScript', category: 'frontend', glowColor: '#3178C6' },
-  { id: 'react', name: 'React 19', category: 'frontend', glowColor: '#61DAFB' },
-  { id: 'nextjs', name: 'Next.js', category: 'frontend', glowColor: '#FFFFFF' },
-  { id: 'tailwind', name: 'Tailwind CSS', category: 'frontend', glowColor: '#06B6D4' },
-  { id: 'nodejs', name: 'Node.js', category: 'backend', glowColor: '#339933' },
-  { id: 'go', name: 'Golang / Systems', category: 'backend', glowColor: '#00ADD8' },
-  { id: 'docker', name: 'Docker / Sandbox', category: 'devops', glowColor: '#2496ED' },
-  { id: 'postgresql', name: 'PostgreSQL', category: 'database', glowColor: '#336791' },
+  { id: 'shield', name: 'Cybersecurity', category: 'security', glowColor: '#00E5FF', level: 'Core Specialty', role: 'Threat Defense' },
+  { id: 'penetration', name: 'Penetration Testing', category: 'security', glowColor: '#10B981', level: 'Advanced', role: 'Red Team / SAST' },
+  { id: 'cryptography', name: 'Cryptography & Auth', category: 'security', glowColor: '#A855F7', level: 'Mission-Critical', role: 'Zero-Trust Ciphers' },
+  { id: 'network', name: 'Network Security', category: 'security', glowColor: '#0191EB', level: 'Senior', role: 'Packet Inspection' },
+  { id: 'linux', name: 'Linux Hardening', category: 'security', glowColor: '#FBBF24', level: 'Kernel-Level', role: 'eBPF / Syscalls' },
+  { id: 'typescript', name: 'TypeScript', category: 'frontend', glowColor: '#3178C6', level: 'Expert', role: 'Type-Safe Architecture' },
+  { id: 'react', name: 'React 19', category: 'frontend', glowColor: '#61DAFB', level: 'Core', role: 'Concurrent UI' },
+  { id: 'nextjs', name: 'Next.js', category: 'frontend', glowColor: '#FFFFFF', level: 'Production', role: 'Edge Rendering' },
+  { id: 'tailwind', name: 'Tailwind CSS', category: 'frontend', glowColor: '#06B6D4', level: 'Expert', role: 'Spatial Design' },
+  { id: 'nodejs', name: 'Node.js', category: 'backend', glowColor: '#339933', level: 'Senior', role: 'Async Microservices' },
+  { id: 'go', name: 'Golang / Systems', category: 'backend', glowColor: '#00ADD8', level: 'Primary', role: 'High-Concurrency (1.2M QPS)' },
+  { id: 'docker', name: 'Docker / Sandbox', category: 'devops', glowColor: '#2496ED', level: 'Hardened', role: 'Container Isolation' },
+  { id: 'postgresql', name: 'PostgreSQL', category: 'database', glowColor: '#336791', level: 'Senior', role: 'ACID Persistence' },
 ];
 
 const TIER_2: TechItem[] = [
-  { id: 'shield', name: 'AppSec / OWASP', category: 'security', glowColor: '#00E5FF' },
-  { id: 'penetration', name: 'Vulnerability Analysis', category: 'security', glowColor: '#10B981' },
-  { id: 'cryptography', name: 'Zero-Trust Protocol', category: 'security', glowColor: '#A855F7' },
-  { id: 'javascript', name: 'ESNext Core', category: 'frontend', glowColor: '#F7DF1E' },
-  { id: 'tanstack', name: 'TanStack State', category: 'frontend', glowColor: '#FF4154' },
-  { id: 'redux', name: 'Redux Toolkit', category: 'frontend', glowColor: '#764ABC' },
-  { id: 'framermotion', name: 'Fluid Motion', category: 'frontend', glowColor: '#0055FF' },
-  { id: 'stripe', name: 'Stripe Security API', category: 'backend', glowColor: '#635BFF' },
-  { id: 'honojs', name: 'Hono.js Edge', category: 'backend', glowColor: '#FF7A00' },
-  { id: 'express', name: 'Express Hardened', category: 'backend', glowColor: '#888888' },
+  { id: 'shield', name: 'AppSec / OWASP', category: 'security', glowColor: '#00E5FF', level: 'Expert', role: 'Vulnerability Elimination' },
+  { id: 'penetration', name: 'Vulnerability Analysis', category: 'security', glowColor: '#10B981', level: 'Audited', role: 'CVE Remediation' },
+  { id: 'cryptography', name: 'Zero-Trust Protocol', category: 'security', glowColor: '#A855F7', level: 'Enterprise', role: 'mTLS & SPIFFE' },
+  { id: 'javascript', name: 'ESNext Core', category: 'frontend', glowColor: '#F7DF1E', level: 'Native', role: 'High-Performance Engine' },
+  { id: 'tanstack', name: 'TanStack State', category: 'frontend', glowColor: '#FF4154', level: 'Advanced', role: 'Async Server State' },
+  { id: 'redux', name: 'Redux Toolkit', category: 'frontend', glowColor: '#764ABC', level: 'Senior', role: 'Predictable State' },
+  { id: 'framermotion', name: 'Fluid Motion', category: 'frontend', glowColor: '#0055FF', level: 'Refined', role: 'Hardware Animation' },
+  { id: 'stripe', name: 'Stripe Security API', category: 'backend', glowColor: '#635BFF', level: 'PCI-DSS', role: 'Cryptographic Payments' },
+  { id: 'honojs', name: 'Hono.js Edge', category: 'backend', glowColor: '#FF7A00', level: 'Ultra-Fast', role: 'Sub-ms Routes' },
+  { id: 'express', name: 'Express Hardened', category: 'backend', glowColor: '#888888', level: 'Hardened', role: 'Secure Gateways' },
 ];
 
 const TIER_3: TechItem[] = [
-  { id: 'network', name: 'Packet Inspection', category: 'security', glowColor: '#0191EB' },
-  { id: 'linux', name: 'Kernel & Syscalls', category: 'security', glowColor: '#FBBF24' },
-  { id: 'prisma', name: 'Prisma ORM', category: 'database', glowColor: '#5A67D8' },
-  { id: 'firebase', name: 'Firebase Security Rules', category: 'database', glowColor: '#FFA611' },
-  { id: 'graphql', name: 'GraphQL Shielded', category: 'backend', glowColor: '#E10098' },
-  { id: 'turborepo', name: 'Monorepo Tooling', category: 'devops', glowColor: '#EF4444' },
-  { id: 'reactnative', name: 'Secure Mobile', category: 'frontend', glowColor: '#61DAFB' },
+  { id: 'network', name: 'Packet Inspection', category: 'security', glowColor: '#0191EB', level: 'Line-Rate', role: 'Deep Inspection' },
+  { id: 'linux', name: 'Kernel & Syscalls', category: 'security', glowColor: '#FBBF24', level: 'Deep', role: 'Low-Level Tracing' },
+  { id: 'prisma', name: 'Prisma ORM', category: 'database', glowColor: '#5A67D8', level: 'Proficient', role: 'Type-Safe Queries' },
+  { id: 'firebase', name: 'Firebase Security Rules', category: 'database', glowColor: '#FFA611', level: 'Hardened', role: 'Client Defenses' },
+  { id: 'graphql', name: 'GraphQL Shielded', category: 'backend', glowColor: '#E10098', level: 'Secured', role: 'Schema Defense' },
+  { id: 'turborepo', name: 'Monorepo Tooling', category: 'devops', glowColor: '#EF4444', level: 'Optimized', role: 'High-Speed Builds' },
+  { id: 'reactnative', name: 'Secure Mobile', category: 'frontend', glowColor: '#61DAFB', level: 'Cross-Platform', role: 'Encrypted Storage' },
 ];
 
 const TIER_4: TechItem[] = [
-  { id: 'docker', name: 'Container Isolation', category: 'devops', glowColor: '#2496ED' },
-  { id: 'figma', name: 'UI / UX Design', category: 'frontend', glowColor: '#0ACF83' },
-  { id: 'mui', name: 'Design Systems', category: 'frontend', glowColor: '#007FFF' },
+  { id: 'docker', name: 'Container Isolation', category: 'devops', glowColor: '#2496ED', level: 'Production', role: 'Immutable Images' },
+  { id: 'figma', name: 'UI / UX Design', category: 'frontend', glowColor: '#0ACF83', level: 'Prototyping', role: 'Spatial Architecture' },
+  { id: 'mui', name: 'Design Systems', category: 'frontend', glowColor: '#007FFF', level: 'Standardized', role: 'Accessible Components' },
 ];
 
 const TIER_5: TechItem[] = [
-  { id: 'shield', name: 'Defensive Architecture', category: 'security', glowColor: '#00E5FF' },
+  { id: 'shield', name: 'Defensive Architecture', category: 'security', glowColor: '#00E5FF', level: 'Apex Standard', role: 'Resilient Design' },
 ];
 
 const CATEGORIES = [
@@ -85,6 +89,11 @@ function TiltBadge({
     setRotY((x / (rect.width / 2)) * 18);
   };
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    soundFX.playHover();
+  };
+
   const handleMouseLeave = () => {
     setRotX(0);
     setRotY(0);
@@ -94,7 +103,7 @@ function TiltBadge({
   return (
     <div
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
         perspective: '1000px',
@@ -144,7 +153,10 @@ export function SkillsSection({
     return (
       <div
         key={`${tierIndex}-${item.id}-${index}`}
-        onMouseEnter={() => setHoveredTech(item)}
+        onMouseEnter={() => {
+          setHoveredTech(item);
+          soundFX.playHover();
+        }}
         onMouseLeave={() => setHoveredTech(null)}
         className={`group relative flex items-center justify-center transition-all duration-300 ${
           highlighted
@@ -167,7 +179,7 @@ export function SkillsSection({
 
         {/* Floating Tooltip */}
         <div
-          className="absolute -top-10 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-200 z-30 whitespace-nowrap text-white text-[11px] sm:text-[12px] font-semibold px-2.5 py-1 rounded-full shadow-2xl backdrop-blur-xl border border-white/20 bg-black/85"
+          className="absolute -top-10 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-200 z-30 whitespace-nowrap text-white text-[11px] sm:text-[12px] font-semibold px-2.5 py-1 rounded-full shadow-2xl backdrop-blur-xl border border-white/20 bg-black/85 font-mono"
         >
           {item.name}
         </div>
@@ -201,7 +213,10 @@ export function SkillsSection({
 
       {/* Section Header */}
       <div className={`relative z-10 text-center max-w-2xl mx-auto ${inStage ? 'mb-6 sm:mb-8' : 'mb-12'}`}>
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white text-[13px] tracking-widest uppercase mb-4 shadow-lg">
+        <div
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white text-[13px] tracking-widest uppercase mb-4 shadow-lg cursor-default"
+          onMouseEnter={() => soundFX.playHover()}
+        >
           <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] animate-pulse" />
           Technical Constellation
         </div>
@@ -209,7 +224,7 @@ export function SkillsSection({
           className="text-3xl sm:text-5xl font-medium tracking-tight text-white mb-3"
           style={{ fontFamily: 'var(--font-heading)' }}
         >
-          Cybersecurity & Software Engineering Stack
+          <CyberScrambleText text="Cybersecurity & Software Engineering Stack" />
         </h2>
         <p className="text-white/90 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
           Languages, offensive and defensive security tools, and resilient software engineering frameworks I leverage to design, build, and defend high-concurrency systems.
@@ -223,7 +238,11 @@ export function SkillsSection({
               <button
                 key={cat.id}
                 type="button"
-                onClick={() => setActiveCategory(cat.id)}
+                onClick={() => {
+                  soundFX.playClick();
+                  setActiveCategory(cat.id);
+                }}
+                onMouseEnter={() => soundFX.playHover()}
                 className={`px-3.5 py-1 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
                   isSelected
                     ? combinedColor
@@ -239,7 +258,7 @@ export function SkillsSection({
         </div>
       </div>
 
-      {/* 3. Constellation Funnel Layout (Matching Reference Image) */}
+      {/* Constellation Funnel Layout */}
       <div className="relative z-10 flex flex-col items-center gap-6 sm:gap-8 w-full max-w-5xl mx-auto">
         {/* Tier 1 (Widest top tier) */}
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4.5 w-full">
@@ -267,24 +286,29 @@ export function SkillsSection({
         </div>
       </div>
 
-      {/* Active Inspector Footer */}
-      <div className="relative z-10 mt-14 h-8 flex items-center justify-center text-center">
+      {/* Active Inspector Footer HUD */}
+      <div className="relative z-10 mt-12 min-h-12 flex items-center justify-center text-center">
         {hoveredTech ? (
-          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/15 border border-white/30 backdrop-blur-md text-sm text-white animate-fade-in">
+          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-black/65 border border-white/30 backdrop-blur-xl text-sm text-white shadow-2xl animate-fade-in font-mono">
             <span
-              className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: hoveredTech.glowColor }}
+              className="w-2.5 h-2.5 rounded-full"
+              style={{
+                backgroundColor: hoveredTech.glowColor,
+                boxShadow: `0 0 10px ${hoveredTech.glowColor}`,
+              }}
             />
-            <span className="font-medium">{hoveredTech.name}</span>
-            <span className="text-white/60">|</span>
-            <span className="text-xs uppercase tracking-wider text-white/80">
-              {hoveredTech.category}
-            </span>
+            <span className="font-semibold text-white">{hoveredTech.name}</span>
+            <span className="text-white/30">•</span>
+            <span className="text-[#00E5FF] text-xs uppercase font-medium">{hoveredTech.level || 'Expert'}</span>
+            <span className="text-white/30">•</span>
+            <span className="text-xs text-white/70">{hoveredTech.role || hoveredTech.category}</span>
           </div>
         ) : (
-          <p className="text-xs tracking-wider uppercase text-white/80 font-medium">
-            Hover over any technology node to inspect details
-          </p>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/30 border border-white/10 backdrop-blur-md text-xs font-mono tracking-wider uppercase text-white/70">
+            <span>✦</span>
+            <span>Hover over any technology node to inspect details</span>
+            <span>✦</span>
+          </div>
         )}
       </div>
     </section>

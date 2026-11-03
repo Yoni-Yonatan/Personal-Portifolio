@@ -238,3 +238,64 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.45);
 }
+
+/* 9. Kinetic Marquee Ticker Keyframes */
+@keyframes tickerLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
+@keyframes tickerRight {
+  0% {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* 10. Holographic Foil Sheen */
+.holographic-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.holographic-sheen::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(0, 229, 255, 0.15) 40%,
+    rgba(79, 70, 229, 0.18) 55%,
+    rgba(255, 255, 255, 0.25) 60%,
+    rgba(255, 255, 255, 0) 75%
+  );
+  transform: rotate(30deg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.holographic-sheen:hover::after {
+  opacity: 1;
+  animation: holoSweep 2.5s infinite linear;
+}
+
+@keyframes holoSweep {
+  0% {
+    transform: translate(-30%, -30%) rotate(30deg);
+  }
+  100% {
+    transform: translate(30%, 30%) rotate(30deg);
+  }
+}
+

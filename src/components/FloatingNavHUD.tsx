@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { soundFX } from '../utils/soundEffects';
 
 const NAV_ITEMS = [
   { id: 'hero', label: 'Orbit', icon: '✦' },
@@ -8,7 +9,15 @@ const NAV_ITEMS = [
   { id: 'contact', label: 'Contact', icon: '✉️' },
 ];
 
-export function FloatingNavHUD({ combinedColor = true }: { combinedColor?: boolean }) {
+export function FloatingNavHUD({
+  combinedColor = true,
+  onOpenTerminal,
+  onToggleMatrix,
+}: {
+  combinedColor?: boolean;
+  onOpenTerminal?: () => void;
+  onToggleMatrix?: () => void;
+}) {
   const [activeSection, setActiveSection] = useState('hero');
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -53,6 +62,7 @@ export function FloatingNavHUD({ combinedColor = true }: { combinedColor?: boole
   }, []);
 
   const scrollTo = (id: string) => {
+    soundFX.playClick();
     if (id === 'hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -62,7 +72,7 @@ export function FloatingNavHUD({ combinedColor = true }: { combinedColor?: boole
 
   return (
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 select-none animate-fade-in">
-      <div className="flex items-center gap-1 sm:gap-1.5 p-1.5 rounded-full bg-black/60 backdrop-blur-3xl border border-white/25 shadow-[0_18px_50px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.25)]">
+      <div className="flex items-center gap-1 sm:gap-1.5 p-1.5 rounded-full bg-black/65 backdrop-blur-3xl border border-white/25 shadow-[0_18px_50px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.25)]">
         {/* Scroll Progress Ring / Percentage */}
         <div className="hidden sm:flex items-center gap-1.5 pl-3 pr-2.5 py-1 border-r border-white/15 text-[11px] font-mono text-white/80">
           <span
@@ -81,6 +91,7 @@ export function FloatingNavHUD({ combinedColor = true }: { combinedColor?: boole
               key={item.id}
               type="button"
               onClick={() => scrollTo(item.id)}
+              onMouseEnter={() => soundFX.playHover()}
               className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
                 isActive
                   ? combinedColor
@@ -94,6 +105,40 @@ export function FloatingNavHUD({ combinedColor = true }: { combinedColor?: boole
             </button>
           );
         })}
+
+        {/* Quick Cyber Terminal Launcher Pill in HUD */}
+        {onOpenTerminal && (
+          <button
+            type="button"
+            onClick={() => {
+              soundFX.playPowerUp();
+              onOpenTerminal();
+            }}
+            onMouseEnter={() => soundFX.playHover()}
+            className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-mono font-medium text-[#00E5FF] bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 border border-[#00E5FF]/30 transition-all cursor-pointer shadow-[0_0_12px_rgba(0,229,255,0.2)]"
+            title="Open Cyber Terminal HUD (⌘K)"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-ping" />
+            <span className="hidden md:inline">⌘K</span>
+            <span className="md:hidden">CLI</span>
+          </button>
+        )}
+
+        {/* Quick Matrix Rain Trigger Pill in HUD */}
+        {onToggleMatrix && (
+          <button
+            type="button"
+            onClick={() => {
+              soundFX.playClick();
+              onToggleMatrix();
+            }}
+            onMouseEnter={() => soundFX.playHover()}
+            className="hidden lg:flex items-center px-2 py-1.5 rounded-full text-xs font-mono text-emerald-400 hover:bg-white/10 transition-all cursor-pointer"
+            title="Toggle Matrix Code Stream"
+          >
+            <span>⚡</span>
+          </button>
+        )}
       </div>
     </div>
   );
